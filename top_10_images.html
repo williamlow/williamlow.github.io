@@ -1,0 +1,452 @@
+
+<html>
+<head>
+  <title>WORKING FILE Hong Kong</title>
+  <!––required in order to read chinese characters in image filenames--!>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!––maybe find these files and host locally--!>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="jquery-2.1.1.min.js"></script> 
+  <style>
+
+
+
+
+
+@font-face {
+    font-family: 'sears_towerregular';
+    src: url('sears_tower-webfont.woff2') format('woff2'),
+         url('sears_tower-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+} 
+
+
+@font-face {
+    font-family: 'shortcutregular';
+    src: url('shortcut-webfont.woff2') format('woff2'),
+         url('shortcut-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+:root {
+  --main-bg-color: #222222;
+  --main-txt-color: #f8f8f8;
+  --main-accent-color: #8b0000;
+}
+
+ 
+{  box-sizing: border-box;}  
+
+    #map{
+	height: 100%;
+		border-top: solid;
+		border-left: solid;
+		border-width: 8px;
+		border-color: var(--main-accent-color);
+		box-sizing: border-box;
+  }
+
+  .leaflet-popup-content-wrapper {
+		background-color: #222222;
+		color: #ffff;
+  }
+ 
+.leaflet-popup-content-wrapper a:link, .leaflet-popup-content-wrapper a:visited, .leaflet-popup-content-wrapper a:hover, .leaflet-popup-content-wrapper a:active {
+	color: #FF0000 !important;
+	} 
+ 
+ 
+  .leaflet-popup-tip {
+		background-color: #222222;
+	}
+	
+html, body {
+  height: 100%;
+  background-color: var(--main-bg-color);
+  background-image: url(background/txture.png);
+  color: var(--main-txt-color)
+  }
+
+body { 
+  font-family: sans-serif;
+  text-align: center;
+  margin: 0;}
+  
+}
+
+section {
+  width: 100%;
+  height: 95%;
+}
+
+.header {
+    width: 100%;
+    top:0px;
+	height: 10%;
+	overflow: hidden;
+	padding-left: 4px;
+	box-sizing: border-box;
+	}
+
+	.title {
+	float:left;}
+	
+	.maintitle {
+		font-family: Arial, sans-serif;
+		color: #FFFF;
+		font-size: calc(18px + 0.7vw);
+		text-align: left;
+		margin: 3 5 -10 0;
+		<!--text-shadow: 0 0 10px #FF0000;-->
+		}
+
+	.sub-title {
+		float: none;
+		text-align: left;
+		font-size: calc(12px + 0.5vw);
+		margin: 10px 0 0 0;
+		display: inline-block;
+		float: left;
+		z-index:-1;
+				}	
+
+
+
+				
+				
+				
+.topnav {
+  overflow: hidden;
+  float: right;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color:  var(--main-txt-color);
+  text-align: center;
+  padding: 1vh 1vw;
+  text-decoration: none;
+  font-size: calc(10px + 0.5vw);
+}
+
+.topnav a:hover {
+  background-color: var(--main-accent-color);
+}
+
+.active {
+  background-color: var(--main-accent-color);
+}
+
+.topnav .icon {
+  display: none;
+}
+
+@media screen and (max-width: 720px) {
+  .header {width:90%;}
+  .topnav a {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+	position: fixed;
+	right:0;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .topnav.responsive {
+	position: fixed;
+	right:0;
+	  z-index: 99999;
+	  background-color: var(--main-bg-color);
+	}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+	
+
+	
+	
+	
+
+article {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+    height: 95%;
+} 
+ 
+/* Pattern styles */
+.left-half {
+  float: left;
+  width: 55%;
+  height: 90%;
+  overflow: hidden;
+			  text-align: center;
+  }
+
+.imagebox {
+position: relative;
+top: 45%;
+transform: translateY(-50%);
+}
+
+
+.right-half {
+  float: left;
+  width: 45%;
+      height: 90%;
+}
+
+
+.left-half img {
+	max-height:80vh;
+	max-width: 50vw;
+	height: auto;
+	width: auto;
+}
+
+
+	
+
+.footer {
+   position: fixed;
+   height: 8%;
+   left: 0;
+   bottom: 0;
+   width: 55%;
+   color: white;
+   text-align: center;
+   margin-top: 5px;
+}
+
+.button {
+  background-color: var(--main-accent-color);
+  border: none;
+  color: white;
+  padding: 1.5vh 2vw;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: calc(12px + 0.6vw);
+  margin: 4px 2px;
+  cursor: pointer;
+  min-width: 20%;
+}
+
+.hiddenbutton {
+	visibility:hidden;
+}
+
+	
+@media screen and (max-width: 720px) {
+  .left-half {
+	height: 62%;
+	width: 100%;
+	overflow-y: auto;
+  }
+    .right-half {
+	height: 28%;
+	width: 100%;
+  }
+	.left-half img {
+		max-height:55vh;
+		max-width: 90vw;
+		height: auto;
+		width: auto;
+	}
+	.footer {
+		position: absolute;
+		width: 100%;
+		bottom: 30%;
+		height: 7%;
+	}
+	#map {
+	border-left: none;
+}
+}
+
+.figureFullFrame {
+	width: 100%;
+}
+
+.top10image {
+	max-width: 100%;
+	height: auto;
+	max-height: 85vh;
+	}
+
+figcaption {
+
+}
+
+figure {
+	padding: 0 3vw 1vh 3vw;
+	display: inline-block;
+	margin: 25px auto;
+	width: 80%
+}
+
+
+
+  </style>
+</head>
+
+<body>
+    	<div class="header">
+		<div class="title">
+		<h1 class="maintitle">Hong Kong <span style="color:var(--main-accent-color)">Through Time:</span></h1>
+			</div>
+		<div class="topnav" id="myTopnav">
+			  <a href="index.html">Home</a>
+			  <a href="top_10_images.html" class="active">Top 10 images</a>
+			  <a href="Who_is_HK_Man.html">Who is HK Man?</a>
+			  <a href="About_Contact.html">About and Contact</a>
+			  <a href="javascript:void(0);" class="icon" onclick="showNavMenu()">
+				<i class="fa fa-bars"></i>
+			  </a>
+			</div>
+		<div class="sub-title">The then and now photography of HK Man
+			</div>
+		</div>
+<section class="container">
+
+<h2> <span style="color:var(--main-accent-color)">Top Ten </span>Images </h2>
+
+<p>Just want to see the best? I've picked out ten of my favourite image pairs from the collection.</p>
+
+<div class="figureFullFrame">
+<figure>
+  <p><img class="top10image" src="photos/上環 - 德輔道中、林士街 交界 5167357142.jpg"
+    alt="Image">
+  <figcaption>Sheung Wan, Junction of Des Voeux Road Central and Rumsey Street<br>Post-war and Nov 2010
+  <p>This pair of images really captures the transformation of Hong Kong: the dramatic and total change in architecture, and the explosion of towers in the distance. But the much-beloved tram provides some continuity between the two images.
+  </figcaption>
+</figure>
+</div>
+
+<div class="figureFullFrame">
+<figure>
+  <p><img class="top10image" src="photos/中環 - 上亞厘畢道、雅賓利道 1964 5209343609.jpg"
+    alt="Image">
+  <figcaption>Upper Albert Road and Albany Road<br>1964 and Nov 2010
+  <p>This set captures the intense three dimensionality that I love about Hong Kong. The red and white colour scheme of taxis visible in both images endures today, and inspired the colours of this website.</figcaption>
+</figure>
+</div>
+
+<div class="figureFullFrame">
+<figure>
+  <p><img class="top10image" src="photos/九龍城 - 東頭村道、聯合道 交界 1977 3099687739.jpg"
+    alt="Image">
+  <figcaption>Kowloon Walled City, seen from Junction Rd and Tung Tau Tsuen Rd<br>1977 and Jan 2009
+  <p>The view of Kowloon Walled City makes this a favourite. If you haven't heard of the walled city before I highly recommend reading into it. There's also a brilliant book by Greg Girard called City of Darkness on the subject.</figcaption>
+</figure>
+</div>
+
+<div class="figureFullFrame">
+<figure>
+  <p><img class="top10image" src="photos/土瓜灣 - 海心公園 3762393926.jpg"
+    alt="Image">
+  <figcaption>Hoi Sham Park<br>Unknown date and July 2009
+  <p>Probably my favourite set of all: aesthetically pleasing and captures the changing city skyline. The additional boulders have made lining the new shot up a problem - I'd love to know if HK Man took any at a slightly lower angle.</figcaption>
+</figure>
+</div>
+
+<div class="figureFullFrame">
+<figure>
+  <p><img class="top10image" src="photos/堅尼地城 - 加多近街、吉席街 交界 3694167263.jpg"
+    alt="Image">
+  <figcaption>Kennedy Town, now the junction of Cadogan Street and Catchick Street<br>Possibly around 1920 and July 2009
+  <p>A dramatic contrast, with only the tram lines marking continuity between the two eras.</figcaption>
+</figure>
+</div>
+
+<div class="figureFullFrame">
+<figure>
+  <p><img class="top10image" src="photos/山頂 - 山頂道 3846150906.jpg"
+    alt="Image">
+  <figcaption>The Peak Tower<br>70s or 80s and August 2009
+  <p>I love the science fiction styling of the original building. Thankfully they replaced it with something almost as unusual in shape.</figcaption>
+</figure>
+</div>
+
+<div class="figureFullFrame">
+<figure>
+  <p><img class="top10image" src="photos/油麻地 - 渡船街 c.1972 5857278261.jpg"
+    alt="Image">
+  <figcaption>Ferry Street, 1972 and Jun 2011
+  <p>An excellent example of land reclamation in the city. I'm also intrigued by the distinctive leaning of the large residential building. The people living there must have been more than a little disappointed in the change in view.</figcaption>
+</figure>
+</div>
+
+<div class="figureFullFrame">
+<figure>
+  <p><img class="top10image" src="photos/灣仔 - 灣仔道、普樂里 交界 4890556012.jpg"
+    alt="Image">
+  <figcaption>Wan Chai Rd and Bullock Ln<br>Unknown date and August 2010
+  <p>Great contrast with the well lined up buses here. A close look at this image reveals that the rather non-descript building behind it has survived.</figcaption>
+</figure>
+</div>
+
+<div class="figureFullFrame">
+<figure>
+  <p><img class="top10image" src="photos/鑽石山 - 大老山隧道工程 3651087308.jpg"
+    alt="Image">
+  <figcaption>Southern entrance to Tate's Cairn Tunnel<br>Date unknown and Jun 2009
+  <p></figcaption>
+	
+  </figure>
+</div>
+
+<div class="figureFullFrame">
+<figure>
+  <p><img class="top10image" src="photos/鰂魚涌 - 英皇道、船塢里 交界  1980年 5424857141.jpg"
+    alt="Image">
+  <figcaption>King's Road and Shipyard Lane, Quarry Bay<br>1980 and Jan 2011
+  <p>The hill in the older image was removed in the 80s to make way for the Kornhill apartment buildings now just visible in the distance.</figcaption>
+</figure>
+</div>
+
+<button class='button' id="toTop" type="button">Return to top of page</button>
+
+</section>
+
+
+ <script>
+
+
+  
+function showNavMenu() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+
+
+$('#toTop').click(function() {
+     document.body.scrollTop = document.documentElement.scrollTop = 0;
+});
+
+
+ 
+  </script>
+</body>
+</html>
+	
