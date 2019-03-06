@@ -1,730 +1,347 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<html>
-<head>
-  <title>WORKING FILE Hong Kong</title>
-  <!––required in order to read chinese characters in image filenames--!>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-	<!––maybe find these files and host locally--!>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
-   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-   crossorigin=""/>
-<!-- Make sure you put this AFTER Leaflet's CSS -->
- <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
-   integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
-   crossorigin=""></script>
-  <script src="jquery-2.1.1.min.js"></script> 
-  <style>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"> 
+	
+    <title>williamlow.xyz</title>
+	
+<style>
 
-
- 
- 
-
-:root {
-  --main-bg-color: #222222;
-  --main-txt-color: #f8f8f8;
-  --main-accent-color: #8b0000;
-}
-
- 
-{  box-sizing: border-box;}  
-
-    #map{
-	height: 100%;
-		border-top: solid;
-		border-left: solid;
-		border-width: 8px;
-		border-color: var(--main-accent-color);
-		box-sizing: border-box;
-  }
-
-  .leaflet-popup-content-wrapper {
-		background-color: #222222;
-		color: #ffff;
-  }
- 
-.leaflet-popup-content-wrapper a:link, .leaflet-popup-content-wrapper a:visited, .leaflet-popup-content-wrapper a:hover, .leaflet-popup-content-wrapper a:active {
-	color: #FF0000 !important;
-	} 
- 
- 
-  .leaflet-popup-tip {
-		background-color: #222222;
+	
+h5 {
+	font-weight: bold;
 	}
 
-	
-#myBtn {
-border: none;
-background-color: var(--main-bg-color);
-color: #f00c17;
-margin-top: 3px;
-text-decoration: underline;
+img {
+	width: 90%;
+	max-width: 350px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	display: block;
+	margin: auto;
 }
 
-#myBtn:hover {
-color: var(--main-text-color)
-}
-	
-	
-html, body {
-  height: 100%;
-  background-color: var(--main-bg-color);
-  background-image: url(background/txture.png);
-  color: var(--main-txt-color)
-  }
-
-body { 
-  font-family: helvetica, sans-serif;
-  text-align: center;
-  margin: 0;}
-  
-}
-
-section {
-  width: 100%;
-  height: 95%;
-}
-
-.header {
-    width: 100%;
-    top:0px;
-	height: 10%;
-	overflow: hidden;
-	padding-left: 4px;
-	box-sizing: border-box;
-	}
-
-	.title {
-	float:left;}
-	
-	.maintitle {
-		color: #FFFF;
-		font-size: calc(18px + 0.7vw);
-		text-align: left;
-		margin: 3 5 -10 0;
-		<!--text-shadow: 0 0 10px #FF0000;-->
-		}
-
-	.sub-title {
-		float: none;
-		text-align: left;
-		font-size: calc(12px + 0.5vw);
-		margin: 10px 0 0 0;
-		display: inline-block;
-		float: left;
-		z-index:-1;
-				}	
-
-
-
-				
-				
-				
-.topnav {
-  overflow: hidden;
-  float: right;
-}
-
-.topnav a {
+.filterDiv {
   float: left;
-  display: block;
-  color:  var(--main-txt-color);
+  background-color: #e6e6e6;
+  color: #333333;
+  width: 30%;
+  max-width: 500px;
   text-align: center;
-  padding: 1vh 1vw;
-  text-decoration: none;
-  font-size: calc(10px + 0.5vw);
-}
-
-.topnav a:hover {
-  background-color: var(--main-accent-color);
-}
-
-.active {
-  background-color: var(--main-accent-color);
-}
-
-.topnav .icon {
+  margin: 1%;
   display: none;
+  height: 480px;
+  position: relative;
+  padding: 5px 10px;
+  box-sizing: border-box;
 }
 
-.topnav .lang_icon {
-	height: 20px;
-	margin-left: 5px;
-	float: right;
-	}
 
 
-
-@media screen and (max-width: 835px) {
-  .header {width:90%;}
-  .topnav a {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-	position: fixed;
-	right:0;
-	font-size: 5vh;
-  }
+.filterDiv p {
+margin-bottom: 25px;
 }
 
-@media screen and (max-width: 835px) {
-  .topnav.responsive {
-	position: fixed;
-	right:0;
-	  z-index: 99999;
-	  background-color: var(--main-bg-color);
-	}
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-	
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-	font-size: 20px;
-  }
-}
-	
 
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 9999; /* Sit on top */
-  padding-top: 3%; /* Location of the box */
-  padding-bottom: 3%;
+.show {
+  display: block;
+}
+
+.container {
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+/* Style the buttons */
+.btn {
+  border: none;
+  outline: none;
+  padding: 8px 13px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #ddd;
+}
+
+.btn.active {
+  background-color: #666;
+  color: white;
+}
+
+/*Makes the links fill the col divs https://stackoverflow.com/questions/796087/make-a-div-into-a-link*/
+.link-box {
+  position:absolute; 
+  width:100%;
+  height:100%;
+  top:0;
   left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  z-index: 1;
+} 
+
+.notes {
+ position: absolute;
+ bottom: 3px;
+ left: 0;
+ width: 100%;
+ font-style: italic;
 }
 
-/* Modal Content */
-.modal-content {
-  background-color: #222222;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid var(--main-accent-color);
-  width: 80%;
-  height: 90%;
-  text-align: left;
-  overflow-y: auto;
+.container-fluid {
+	margin-top: 10px;
+	}
+
+@media screen and (max-width: 960px) {
+.filterDiv {
+  width: 48%
+}
+}
+	
+@media screen and (max-width: 720px) {
+.filterDiv {
+  height: auto;
+  width: 98%
+}
 }
 
-/* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
+/*80's theme begins	*/
+
+.body80 {
+  background-image: url("files/eighties_theme/background80s-large.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  color: #FFFFFF;
+  font-family: Courier New, Monospace;
   font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.modal-content h1 {
-color: var(--main-accent-color);
-}
-
-
-input {
-margin-bottom: 8px;
-	}
-
-fieldset {
-width: 250px;
-margin-bottom: 20px;
-margin-top: 20px;
-}
-
-.readonly {
-background-color: #a8a8a8;
-}
-
-legend {
-font-weight: bold;
-}	
-	
-#correctionPhoto img {
-	height: 250px;
-	margin: 10px, 0, 10px, 20px;
-}
-
-#correctionMap { height: 180px; }
-
-#submitButton {
-	font-size: 20px;
-	margin-bottom: 30px;
-	margin-left: 5px;
-	}
-
-article {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  text-align: center;
-  transform: translate(-50%, -50%);
-    height: 95%;
-} 
- 
-/* Pattern styles */
-.left-half {
-  float: left;
-  width: 55%;
-  height: 90%;
-  overflow: hidden;
-			  text-align: center;
-  }
-
-.imagebox {
-position: relative;
-top: 45%;
-transform: translateY(-50%);
-}
-
-
-#introText {
-	max-height: 80%;
-	overflow-y: auto;
-	width: 100%;
-	}
-
-#introText p {
-	margin-left: 5vw;
-	margin-right: 5vw;
-	text-align: justify;
-	}
-
-	
-
-.right-half {
-  float: left;
-  width: 45%;
-      height: 90%;
-}
-
-
-.left-half img {
-	max-height:80vh;
-	max-width: 50vw;
-	height: auto;
-	width: auto;
-}
-
-
-	
-
-.footer {
-   position: fixed;
-   height: 8%;
-   left: 0;
-   bottom: 0;
-   width: 55%;
-   color: white;
-   text-align: center;
-   margin-top: 5px;
-}
-
-.button {
-  background-color: var(--main-accent-color);
-  border: none;
-  color: white;
-  padding: 1.5vh 2vw;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: calc(12px + 0.6vw);
-  margin: 4px 2px;
-  cursor: pointer;
-  min-width: 20%;
-}
-
-.hiddenbutton {
-	visibility:hidden;
-}
-
-	
 @media screen and (max-width: 720px) {
-  .left-half {
-	height: 62%;
-	width: 100%;
-	overflow-y: auto;
-  }
-    .right-half {
-	height: 28%;
-	width: 100%;
-  }
-	.left-half img {
-		max-height:55vh;
-		max-width: 90vw;
-		height: auto;
-		width: auto;
-	}
-	.footer {
-		position: absolute;
-		width: 100%;
-		bottom: 30%;
-		height: 7%;
-	}
-	#map {
-	border-left: none;
+.body80 {
+  background-image: url("files/eighties_theme/background80s-small.jpg");
 }
+}
+
+.header80 {
+	font-family: 'Press Start 2P', cursive;
+	text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+}
+
+.link-box80 {
+	box-sizing: border-box;
+	box-shadow: 0 0 10px 10px #e562e3
+	}
+
+.filterDiv80 {
+  box-shadow: inset 0 0 10px 3px #e562e3;
+    background-color: #1db3e5;
+  color: #FFFFFF;
+  height: 525px;
+	}
+
+.btn80 {
+background-image: url("files/eighties_theme/7A9m.gif");
+	  background-size: cover;
+	    background-position: center center;
+		color: #FFFFFF;
+		border: 2px solid #e562e3;
+		  box-sizing: border-box;
+		    font-weight: bold;
+	}
+
+.btn80:hover {
+  color: #e562e3;
+}
+
+.btn80.active {
+  color: #1db3e5;
+}
+
+	
+.h580 {
+font-family: 'Press Start 2P', cursive;
+font-size: 0.9rem;
+text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+}
+	
+.header a {
+background: #f1f1f1;
+padding: 0 3px;
+color: #000000;
+}
+
+.header a:hover {
+color: #FFFFFF;
+background: #666666;
+}
+
+.header80 a {
+background: none;
+padding: 0;
+color: #FFFFFF;
+}
+
+.header80 a:hover {
+color: #FFFFFF;
+background: none;
+}	
 
 </style>
-</head>
+  </head>
+  <body class="body">
 
-<body>
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h1>Correction submission form</h1>
-  <form id="correctionForm">
-  Username:<br>
-  <input type="text" name="username" size="35">
-  <br>
-  Email<br>
-  <input type="email" name="email" size="35">
-  <fieldset>
-  <legend>You are submitting a correction for this image:</legend>
-  <div id="correctionPhoto">blank</div><br>
-  </fieldset>
-  <fieldset>
-  <legend>Road/building name</legend>
-  Current name:<br>
-  <input class="readonly" type="text" name="orig_loc_name" value="import from marker" size="60" readonly> <br>
-  Correction:<br>
-  <input type="text" name="new_loc_name" size="60"><br>
-  </fieldset>
-  
-  <fieldset>
-  <legend>Date taken</legend>
-  Current date:<br>
-  <input class="readonly" type="text" name="orig_old_date" value="import from marker" size="35" readonly> <br>
-  Correction:<br>
-  <input type="text" name="new_old_date" value="eg. 1972, 1970s, circa 1975" onfocus="this.value=''" size="35"><br>
-  </fieldset>
-
-  <fieldset>
-  <legend>Location</legend>
-  <div id="correctionMapContainer">
-  <div id="correctionMap"></div>
-  </div>
-  Current coordinates:<br>
-  <input class="readonly" type="text" name="orig_coords" value="import from marker" size="50" readonly > <br>
-  Correction:<br>
-  <input class="readonly" type="text" name="new_coords" value="Click map to update location" size="50" readonly><br>
-  </fieldset>
-
-  <input id="submitButton" type="submit" value="Submit">
-  </form>
-  </div>
-
+	
+	
+	
+	
+<div class="container-fluid">
+  <div class="header">
+  <h1>William Low</h1>
+  <p><a href="contact.html">Contact me</a></p> 
+  <p>Or find me on <a href="https://twitter.com/williamdlow">Twitter</a></p>
+</div></div>
+    
+  <div class="container-fluid">     
+   <div id="myBtnContainer">
+  <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+  <button class="btn" onclick="filterSelection('map')"> Maps</button>
+  <button class="btn" onclick="filterSelection('hist')"> History</button>
+  <button class="btn" onclick="filterSelection('photo')"> Photography</button>
+  <button class="btn" onclick="filterSelection('prog')"> Programming & web design</button>
 </div>
-    	<div class="header">
-		<div class="title">
-		<h1 class="maintitle">Hong Kong <span style="color:var(--main-accent-color)">Through Time:</span></h1>
-			</div>
-		<div class="topnav" id="myTopnav">
-			  <a href="index.html" class="active">Home</a>
-			  <a href="top_10_images.html">Top 10 images</a>
-			  <a href="Who_is_HK_Man.html">Who is HK Man?</a>
-			  <a href="About_Contact.html">About and Contact</a>
-			  <a href="ch_version.html">漢字<img class="lang_icon" src="lang_HK_CH.png"></a>
-			  <a href="javascript:void(0);" class="icon" onclick="showNavMenu()">
-				<i class="fa fa-bars"></i>
-			  </a>
-			</div>
-		<div class="sub-title">The then and now photography of HK Man
-			</div>
-		</div>
-<section class="container">
-  <div class="left-half">
-  <!-- Trigger/Open The Modal -->
-		<div id="introText"><p>These photos were taken by an anonymous Flickr poster called HK man. From January 2007 to October 2011 he assembled more than 1000 then-and-now photographs of Hong Kong. His collection is notable for its size, and how well aligned the old and new photographs are. They provide an incredible record of architectural change in Hong Kong.</p><p>HK Man’s account is no longer in use, and efforts to contact him have failed. Changes to Flickr’s allowance means that soon several of these images will be lost. In response to this, and a fear that the collection could one day disappear altogether, they have been saved and uploaded here. </p><p>All images have been assigned a location from their title. Some will be incorrect, and many are missing dates for the original photographs. If you would like to correct a location or provide an estimated date for an image, a link is provided inside each map popup. </p><p>Finally, if anyone knows who HK Man is, please get in touch. </p><p>To get started, click a marker or select a random with the button below. </p></div>
-  	    <div id="infobox" class="imagebox">Loading...</div>
-  <div class="footer">
-  		<button class='button hiddenbutton' id="prev" type="button">Previous</button>
-		<button class='button' id="random" type="button">Random</button>
-		<button class='button hiddenbutton' id="next" type="button">Next</button>
+</div>
+
+<div class="container-fluid">
+  <div class="filterDiv map history">
+  <img src="files/thumbs/thumb_HKTT.jpg">
+  <h5 class="h5">Hong Kong Through Time</h5>
+	  <p>Over 1000 then-and-now images of Hong Kong, taken by Flickr user HK Man and displayed here on a webmap. Completed partly in the hope of identifying the mysterious HK Man. Labelled and geocoded with Python, displayed with Leaflet.</p>
+	  <small class="notes">Leaflet, Python, HTML/CSS/JS</small>
+	  	  <a href="HKTT/HKTT_main.html"><span class="link-box"></span></a>
+      </div>
+  <div class="filterDiv map prog">
+  <img src="files/thumbs/thumb_MCC.jpg">
+  <h5 class="h5">Which country's capital is most central?</h5>
+	  <p>A long winded but ultimately decisive response to the question of which country has the most geographically central capital. Potentially good pub quiz knowledge.</p>
+	  <small class="notes">ArcMap/QGIS, R, Leaflet</small>
+	  	  <a href="MCC/MCC_main.html"><span class="link-box"></span></a>
   </div>
+  <div class="filterDiv prog map">
+  <img src="files/thumbs/thumb_BCT.jpg">
+  <h5 class="h5">English constituency boundary change tool</h5>
+	  <p>A small application built in Shiny to allow residents of England to see if planned changes to political boundaries will affect them.</p>
+	  <small class="notes">R, Shiny</small>
+	  	  <a href="https://william-low.shinyapps.io/English-boundary-change-postcode-check-tool/"><span class="link-box"></span></a>
   </div>
-  <div class="right-half">
-			<div id="map"></div>
+  <div class="filterDiv photo hist">
+  <img src="files/thumbs/thumb_YTM.jpg">
+  <h5 class="h5">Yangon Time Machine</h5>
+	  <p>Then-and-now photography of Yangon, accompanied by articles discussing the buildings shown in the images, and how their stories tie into that of the city. Also includes some historical mapping.</p>
+	  <small class="notes">Photography, Research, Wordpress, OpenLayers</small>
+	  	  <a href="http://www.yangontimemachine.com"><span class="link-box"></span></a>
   </div>
-</section>
+   <div class="filterDiv photo">
+  <img src="files/thumbs/thumb_YAR.jpg">
+  <h5 class="h5">Yangon At Rest</h5>
+	  <p>A small collection of photographs taken in Yangon between 1AM and 3AM.</p>
+	  <small class="notes">Photography, late bedtimes</small>
+	  	  <a href="YAR/YAR_main.html"><span class="link-box"></span></a>
+  </div>
+  <div class="filterDiv prog" id="changeDiv80s">
+  <img src="files/thumbs/thumb_80s.jpg">
+  <h5 class="h5">This website isn't 80's enough</h5>
+	  <p>Tired of these minimalist modern websites? Insert coin here.</p>
+	  <small class="notes">CSS</small>
+	  	  <a href="javascript:void(0);" onclick="make80s()"><span class="link-box"></span></a>
+      </div>
+</div>
 
-  
-<script type="text/javascript" src="HK_simple.js"></script>
+	
+	
+	
+	
+	
 
-  <script>
-  
-// Get the modal
-var modal = document.getElementById('myModal');
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-$('.right-half').on('click', '#myBtn', function () {
-     modal.style.display = "block";
-	 popCorrectionForm();
-	 $(".modal-content").scrollTop(0);
-});
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-  document.getElementById("correctionMapContainer").innerHTML = '<div id="correctionMap"></div>';
-  document.getElementById("correctionForm").reset();
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-	document.getElementById("correctionMapContainer").innerHTML = '<div id="correctionMap"></div>';
-	document.getElementById("correctionForm").reset();
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	
+<script>
+filterSelection("all")
+function filterSelection(c) {
+  var x, i;
+  x = document.getElementsByClassName("filterDiv");
+  if (c == "all") c = "";
+  for (i = 0; i < x.length; i++) {
+    w3RemoveClass(x[i], "show");
+    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
   }
 }
 
-var correctionMap
-
-function getCorrectionMap() {
-var correctionMap = L.map('correctionMap').setView([e_current.lat, e_current.long], 14);
-
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(correctionMap);
-
-var oldMarker = L.marker([e_current.lat, e_current.long], {icon: correctionIcon}).addTo(correctionMap);
-oldMarker.bindPopup("<b>Current location</b>").openPopup();
-
-var newLocationPopup = L.popup();
-
-function onMapClick(e) {
-    newLocationPopup
-        .setLatLng(e.latlng)
-        .setContent("New location")
-        .openOn(correctionMap);
-	document.querySelector('[name="new_coords"]').value = e.latlng.toString().replace(/[^\d,.\s]/g, '');
-}
-
-correctionMap.on('click', onMapClick);
-}
-
-
-
-function popCorrectionForm () {
-document.querySelector('[name="orig_loc_name"]').value = e_current.name;
-document.querySelector('[name="orig_old_date"]').value = e_current.old_date;
-document.querySelector('[name="orig_coords"]').value = e_current.lat+', '+e_current.long;
-correctionPhoto.innerHTML = ('<img src="photos/' + e_current.filename + '" alt="Trying to load image..."/>');
-getCorrectionMap();
-}
-
-function showNavMenu() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
+function w3AddClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    if (arr1.indexOf(arr2[i]) == -1) {element.className += " " + arr2[i];}
   }
 }
 
-
-function showButtons() {
-    $(".hiddenbutton").css({ "visibility": "visible"});
-	};
-
-//icons
-var doneIcon = L.icon({
-    iconUrl: 'circle_tick.png',
-    iconSize:     [15, 15], // size of the icon
-    iconAnchor:   [8, 8], // point of the icon which will correspond to marker's location
-    popupAnchor:  [0, -10] // point from which the popup should open relative to the iconAnchor
-});
-
-var freshIcon = L.icon({
-    iconUrl: 'circle_red_fix.png',
-    iconSize:     [15, 15], // size of the icon
-    iconAnchor:   [8, 8], // point of the icon which will correspond to marker's location
-    popupAnchor:  [0, -10] // point from which the popup should open relative to the iconAnchor
-});
-
-var correctionIcon = L.icon({
-    iconUrl: 'circle_red.png',
-    iconSize:     [15, 15], // size of the icon
-    iconAnchor:   [8, 8], // point of the icon which will correspond to marker's location
-    popupAnchor:  [0, -10] // point from which the popup should open relative to the iconAnchor
-});
-
-  // initialize the map
-  var map = L.map('map').setView([22.293701, 114.172459], 14);
-
-  // load a tile layer
-  //get a more interesting basemap
-L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png').addTo(map);
-
-var e_current
-var currentPhoto = 0;
-var layers = {};
-
-//this one closes all popups using a leaflet function, iterating over each layer
-function closeAllPopups() {
-map.eachLayer(function (layer) {
-  layer.closePopup();
-});}
-
-//this one is more of a hack, which finds the close button on the prior popup and manually clicks it (seems dangerous, but works)
-function closePriorPopup() {
-$(".leaflet-popup-close-button")[0].click();
+function w3RemoveClass(element, name) {
+  var i, arr1, arr2;
+  arr1 = element.className.split(" ");
+  arr2 = name.split(" ");
+  for (i = 0; i < arr2.length; i++) {
+    while (arr1.indexOf(arr2[i]) > -1) {
+      arr1.splice(arr1.indexOf(arr2[i]), 1);     
+    }
+  }
+  element.className = arr1.join(" ");
 }
 
-// Popup window function
-	function basicPopup(url) {
-popupWindow = window.open(url,'popUpWindow','height=500,width=500,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+// Add active class to the current button (highlight it)
+var btnContainer = document.getElementById("myBtnContainer");
+var btns = btnContainer.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function(){
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+
+function make80s() {
+	var classToChange = ['body','header','link-box','filterDiv','btn','h5']
+	for (c in classToChange){
+		var target = classToChange[c];
+		var x = document.getElementsByClassName(target);
+		for (i = 0; i < x.length; i++){x[i].classList.add(target+80)};}
+		window.scrollTo(0,0);
+	document.getElementById('changeDiv80s').innerHTML= "<img src='files/thumbs/thumb_80s.jpg'><h5 class='h5 h580' id='titleChange80s'>Please make it stop</h5><p>Take me back to the future</p><small class='notes'>CSS</small><a href='javascript:void(0);' onclick='undo80s()'><span class='link-box link-box80'></span></a>";
+	}
+
+function undo80s(){
+	var classToChange = ['body','header','link-box','filterDiv','btn','h5']
+	for (c in classToChange){
+		var target = classToChange[c];
+		var x = document.getElementsByClassName(target);
+		for (i = 0; i < x.length; i++){x[i].classList.remove(target+80)};}
+		window.scrollTo(0,0);
+	document.getElementById('changeDiv80s').innerHTML= "<img src='files/thumbs/thumb_80s.jpg'><h5 class='h5'>This website isn't 80's enough</h5><p>Yeah okay, maybe that was a bit much.</p><small class='notes'>CSS</small><a href='javascript:void(0);' onclick='make80s()'><span class='link-box'></span></a>";
 	}
 	
-function onEachFeature(feature, layer) {
-    layer.bindPopup('<b>Location: </b>' + feature.properties.name + '<br>' + '<b>Original photo date:</b> ' + feature.properties.old_date + '<br>' + '<b>New photo date:</b> ' + feature.properties.new_date+'<br> <div style="text-align:center;"><button id="myBtn">Submit correction</button></div>',{autoClose: false,closeOnClick:true, autoPan: false});
-	layer.on(
-        "click",function(e){
-		e_current= e.target.feature.properties;
-		showButtons();
-		closeAllPopups();
-		layer.setIcon(doneIcon);
-		getName(e);
-		currentPhoto = parseInt(layer.feature.properties.fid,10);
-		layer.openPopup();
-		centreOnPopup(e);
-    });
-                layer.on('mouseover', function() { layer.openPopup(); });
-                layer.on('mouseout', function() { 
-				if (parseInt(layer.feature.properties.fid,10) == currentPhoto) {
-				console.log("stays open")} else {
-				layer.closePopup();} });
-//	layer.on("mouseover",function(e){
-//                layer.setIcon(redIcon)
-//    });
-//    layer.on("mouseout",function(e){
-//                layer.setIcon(blackIcon)
-//    });
-	layers[feature.properties.fid] = layer;
-}
-
-// call from outside map
-function highlightFeature(fid){
-    layers[fid].fireEvent('click');
-	console.log('new photo: '+currentPhoto);
-	console.log('next is '+(currentPhoto+1));
-}
-
-function clickOnMapItem(itemId) {
-    var id = parseInt(itemId);
-    //get target layer by it's id
-    var layer = geojson.getLayer(id);
-    //fire event 'click' on target layer 
-    layer.fireEvent('click');
-	layer.openpopup();
-}
-
-$('#prev').click(function() {
-    highlightFeature(currentPhoto-1);
-});
-
-$('#next').click(function() {
-    highlightFeature(currentPhoto+1);
-});
-
-$('#random').click(function() {
-	highlightFeature(Math.floor((Math.random() * 1032) + 1));
-	});
-
-$(document).keydown(function(e) {
-    switch(e.which) {
-        case 37: // left
-		highlightFeature(currentPhoto-1);
-        break;
-
-        case 39: // right
-		highlightFeature(currentPhoto+1);
-        break;
-
-        default: return; // exit this handler for other keys
-    }
-    e.preventDefault(); // prevent the default action (scroll / move caret)
-});
-
-
-function getName(e) {
-		//info.update is a function used to populate an external div
-		info.update(e.target.feature.properties);
-		document.getElementById("introText").innerHTML = '';
-}
-
-markerMap = {}; // a global variable unless you extend L.GeoJSON
 	
-//ok this has three parts - it initialises with calling the geojson, then contains the icon stuff, and also calls Get Each Feature, which is external
-var geojson = L.geoJson(hkpoints, {
-
-
-//the pointToLayerfunction gives the icon
-pointToLayer: function (feature, latlng) {
-		var marker = L.marker(latlng, {icon: freshIcon});
-		//markerMap[feature.properties.fid] = marker;
-		return marker; 
-        },
-//and this adds the info
-onEachFeature: onEachFeature}).addTo(map);
- 
- 
- //
-var info = L.control();
-
-info.onAdd = function (map) {
-    this.info = L.DomUtil.get("infobox"); // get div...?
-    this.update();
-    return this._div;
-};
-
-// method that we will use to update the control based on feature properties passed
-info.update = function (props) {
-    this.info.innerHTML = (props ?
-		'<img src="photos/' + props.filename + '" alt="Trying to load image..."/>'
-		: ''
-);
-};
-
-//could use something like this as a fix for the autopan issue
-centreOnPopup = function (e) {
-		var popup_from_click = e.target.getPopup();
-		var px = map.project(popup_from_click._latlng); // find the pixel location on the map where the popup anchor is
-		px.y -= popup_from_click._container.clientHeight/2 // find the height of the popup container, divide by 2, subtract from the Y axis of marker location
-		map.panTo(map.unproject(px),{animate: true}); // pan to new center
-		}
-		
-
-info.addTo(map);
- 
- 
- 
- 
- 
-  </script>
-</body>
+</script>
+	
+  </body>
 </html>
-	

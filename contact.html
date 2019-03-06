@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+    <title>williamlow.xyz</title>
+	
+<style>
+
+.header {
+margin: 10px 15px;
+}
+
+.inputs {
+margin: 10px 15px;
+}
+
+textarea {
+resize: both;
+height: 30vh;
+width: 80vw;
+max-width: 600px;
+}
+
+.header a {
+background: #f1f1f1;
+padding: 0 3px;
+color: #000000;
+}
+
+.header a:hover {
+color: #FFFFFF;
+background: #666666;
+}
+
+</style>
+ </head>
+  
+  <body class="body">
+
+	
+ <div class="header">
+  <h1>Contact me</h1>
+  <p>Or <a href="index.html">go back</a></p>
+
+</div>
+<div>
+<form id="contactform" method="POST">
+    
+	<input type="text" class="inputs" name="name" placeholder="Your name"><br>
+    <input type="email" class="inputs" name="_replyto" placeholder="Your email" required><br>
+	
+    <input type="hidden" name="_subject" value="Website contact" /><br>
+    
+	<textarea name="message" class="inputs" placeholder="Your message"  required></textarea><br>
+    
+	<input type="text" name="_gotcha" style="display:none" /><br>
+    <input type="submit" class="inputs" value="Send">
+</form>
+</div>
+<script>
+    var contactform =  document.getElementById('contactform');
+    contactform.setAttribute('action', '//formspree.io/' + 'williamlow.xyz' + '@' + 'gmail' + '.' + 'com');
+</script>	
+	
+
+	
+<script>
+
+	
+</script>
+	
+  </body>
+</html>

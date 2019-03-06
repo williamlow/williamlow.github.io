@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Which country's capital is most central?</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch:400,700" rel="stylesheet"> 
+	<!--<link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">-->
+	
+	<link rel="icon" href="files/web_icon.png">
+<style>
+
+:root {
+  --color-a-dark: #6ddccb;
+  --color-a-light: #bdede5;
+  --color-b-dark: #f96b71;
+  --color-b-light: #ffb7bb;
+  --color-water:  #c7eaf1;
+  --color-unused: #adadad;
+  --color-change-text: #000000;
+}
+
+
+body {
+	margin: 0px;
+	font-family: 'Lato', sans-serif;
+	overflow-y: hidden;
+	background: linear-gradient(90deg, var(--color-a-light) 50%, var(--color-b-light) 50%);
+}
+
+#header {
+height: 5vh;
+background-color: var(--color-a-dark);
+overflow: hidden;
+font-family: 'Cabin Sketch', cursive;
+border-bottom: 1px solid black;
+color: var(--color-change-text);
+}
+
+h2 {
+	font-size: calc(10px + 0.8vw + 0.8vh);
+    padding: 7px;
+    margin: 0px;
+	font-weight: bold;
+	font-family: 'Cabin Sketch', cursive;
+}
+
+#map { height: 70vh; }
+
+.leaflet-container {background: var(--color-water)}
+
+.legend {
+    line-height: calc(9px + 0.5vw);
+	font-size: calc(9px + 0.5vw)
+}
+.legend i {
+    width: calc(9px + 0.5vw);
+    height: calc(9px + 0.5vw);
+    float: left;
+    margin-right: 8px;
+    opacity: 0.9;
+}
+
+.info {
+    padding: 6px 8px;
+    background: #f2eded;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+#menuContainer {
+	height: 25vh;
+	overflow-y: auto;
+	border-top: 1px solid black;
+}
+
+.split {
+	width:50%;
+}
+
+#left {
+	background: var(--color-a-light);
+	float: left;
+	}
+
+#right {
+	background: --color-b-light;
+	float: left;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.flex-container > div {
+  background-color: #f1f1f1;
+  margin: 3px;
+  line-height: 15px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  min-height: 30px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  padding: 1px;
+}
+
+h3 {
+text-align: center;
+margin: 5px 0px;
+font-family: 'Cabin Sketch', cursive;
+font-size: calc(15px + 1.2vw);
+}
+
+.num {
+min-width: 20px;
+background: #f2eded;
+height: 100%;
+display: flex;
+align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  float: left;
+}
+
+.num_r {
+min-width: 30px;
+} 
+ 
+.name {
+height: 100%;
+display: flex;
+align-items: center;
+  justify-content: center;
+flex-grow: 1;
+text-align: center;
+padding: 0 5px;
+  min-height: 30px;
+  color: var(--color-change-text);
+  }
+  
+.name_l {
+background: var(--color-a-dark);
+}
+
+.name_r {
+background: var(--color-b-dark);
+}
+
+
+.title {
+float:left;
+}
+
+.topnav {
+  overflow: hidden;
+  float: right;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color:  var(--main-txt-color);
+  text-align: center;
+  padding: 1vh 1vw;
+  text-decoration: none;
+  font-size: calc(13px + 0.8vw);
+}
+
+.topnav a:hover {
+  text-decoration: underline;
+}
+
+.topnav .icon {
+  display: none;
+  font-size: larger;
+}
+
+@media screen and (max-width: 870px) {
+  .header {width:90%;}
+  .topnav a {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+	position: fixed;
+	right:0;
+	}
+  }
+
+@media screen and (max-width: 870px) {
+  .topnav.responsive {
+	position: fixed;
+	right:0;
+	  z-index: 99999;
+	  background-color: var(--color-a-dark);
+	  border: 1px solid black;
+	  width: 200px;
+	}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+.buttonbox {
+position: relative;
+}
+
+.buttons {
+padding: 0px;
+border: none;
+cursor: pointer;
+}
+
+.infoBox {
+width: 80vw;
+max-width: 450px;
+font-size: calc(10px + 0.75vw);
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 9999; /* Sit on top */
+  padding-top: 3%; /* Location of the box */
+  padding-bottom: 3%;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: var(--color-a-light);
+  margin: auto;
+  padding: 20px;
+  border: 1px solid black;
+  width: 80%;
+  height: 90%;
+  text-align: left;
+  overflow-y: auto;
+}
+
+/* The Close Button */
+.close {
+  color: var(--color-b-dark);
+  float: right;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content h1 {
+color: var(--color-b-dark);
+font-family: 'Cabin Sketch', cursive;
+text-align: center;
+}
+
+.modal-content h2 {
+text-align: center;
+}
+
+.modal-content a {
+color: var(--color-b-dark);
+}
+
+.modal-content a:hover {
+color: var(--color-b-light);
+}
+
+</style>
+	
+</head>
+<body>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+	<h1>How does this work?</h1>
+	<h2>The short version</h2>
+<p>First we find the geographical centre of each country. Since some countries include islands and territories that are a long way from their main landmass, these were excluded to make the centre more meaningful. We then measure the distance between the capital city and that centre.</p>
+
+<p>We can't just compare those distances, as that would just make small countries come out on top. Instead we take the area of the country landmass, and divide the distance by that. Well, actually we divide it by the square root of the area, due to maths.</p>
+
+<p>This means we now have the distance proportionate to the country size, which we can compare between countries.</p>
+
+<p>Some countries on the map look like they should do much worse in the ranking than they currently do - Canada for instance. This is because the map is based on the Mercator projection, which hugely distorts the size of things the further away from the equator we go.</p>
+
+
+<h2>The long version</h2>
+
+<p>All calculations done were based on an edited version of the most detailed world polygon file I could find: the US State Department's <a href="http://geonode.state.gov/layers/geonode%3AGlobal_LSIB_Polygons_Detailed" target="_blank">Global LSIB</a>. The LSIB generally places geographically distinct autonomous or dependent regions in separate polygon groups to those of their associated country - so many of these regions have not been included in calculations. An example of this is the Isle of Man, a British dependency between England and Northern Island.</p>
+
+<p>I used <a href="https://www.naturalearthdata.com/" target="_blank">Natural Earth</a> data for cities, also with a few edits here and there. It would be more robust to use polygons covering the extent of the city, but this data is not available with global coverage. The modern '<a href="https://en.wikipedia.org/wiki/City-state" target="_blank">city states</a>' of Monaco, Singapore, Vatican City were removed; there was no way to measure their centrality given their entire landmass is one city.</p>
+
+<p>In order to establish which polygons would be included in each country feature, a 300km geodesic buffer was drawn around each individual polygon in ArcMap. Geodesic essentially means that the buffer is drawn <a href="https://www.esri.com/news/arcuser/0111/geodesic.html" target="_blank">as if on the surface of a sphere</a>, so distances are more accurate. Non-geodesic buffering would produce buffers that varied wildly in size according to the projection used.</p>
+
+<p>An r script was then run on the data. Starting from the polygon containing the country's capital, overlapping buffers were merged together. Any not connected to the starting polygon at the end of this process were discarded, though some manual fixes were made. This process is why, for instance, Greenland is not part of the Denmark country polygon.</p>
+
+<p>The r script also calculated the geodesic distances between capitals and centre points, along with the combined area of the selected polygons for each country. In order to be able to compare distances in proportion to the size of the country, they were divided by the square root of the country area. The resulting figure itself has not been included in the map environment, but instead has been converted into rankings.</p>
+
+<p>All data was then tidied as necessary in QGIS. The very useful <a href="https://mapshaper.org/" target="_blank">mapshaper</a> tool was used to simplify and shrink the file size of the large LSIB file to something more practical for a web map: from 157mb to 2.3. Some smaller landmass polygons were lost in this process. The data calculated in r based on the full LSIB was joined to this simplified version, and numbers formatted for use in labels and text.</p>
+
+<p>Geojson files of country polygons, capital cities, geographic centre points and the distance line between them were then loaded into the web map, which is built in Leaflet. Since the colour scheme chosen is aggressively impractical for those with colour blindness, a CSS-altering menu option was included.</p>
+
+
+<h2>Finally</h2>
+
+<p>Thanks for visiting. This was just a fun project to practice with leaflet and r. You can find my other work and projects <a href="williamlow.xyz">here</a>.</p>
+
+  </div>
+
+</div>
+
+
+<div id="header">
+<div class="title">
+<h2 class="title">Which country's capital is most central?</h2>
+</div>
+
+		<div class="topnav" id="myTopnav">
+			  <a href="#" onclick="openModal()">How does this work?</a>
+			  <a href="#" id="colorBlindSwitch" onclick="changeColor()">Hey! I'm colour blind</a>
+			  <a href="javascript:void(0);" class="icon" onclick="showNavMenu()">
+				<i class="fa fa-bars"></i>
+			  </a>
+			</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div id="mapsection">
+ <div id="map"></div>
+</div>
+
+<div id="menuContainer">
+<div class="split" id="left">
+<h3>The most central..</h3>
+<div class="flex-container">
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(1)"><div class="num num_l">1</div><div class="name name_l">Spain</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(2)"><div class="num num_l">2</div><div class="name name_l">Eritrea</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(3)"><div class="num num_l">3</div><div class="name name_l">Burkina Faso</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(4)"><div class="num num_l">4</div><div class="name name_l">Bangladesh</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(5)"><div class="num num_l">5</div><div class="name name_l">Namibia</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(6)"><div class="num num_l">6</div><div class="name name_l">Costa Rica</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(7)"><div class="num num_l">7</div><div class="name name_l">Belize</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(8)"><div class="num num_l">8</div><div class="name name_l">Nigeria</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(9)"><div class="num num_l">9</div><div class="name name_l">Rwanda</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(10)"><div class="num num_l">10</div><div class="name name_l">Iraq</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(11)"><div class="num num_l">11</div><div class="name name_l">Ethiopia</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(12)"><div class="num num_l">12</div><div class="name name_l">Belarus</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(13)"><div class="num num_l">13</div><div class="name name_l">Colombia</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(14)"><div class="num num_l">14</div><div class="name name_l">Madagascar</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(15)"><div class="num num_l">15</div><div class="name name_l">Hungary</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(16)"><div class="num num_l">16</div><div class="name name_l">Ivory Coast</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(17)"><div class="num num_l">17</div><div class="name name_l">Saudi Arabia</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(18)"><div class="num num_l">18</div><div class="name name_l">Albania</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(19)"><div class="num num_l">19</div><div class="name name_l">Slovenia</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(20)"><div class="num num_l">20</div><div class="name name_l">Belgium</div></button></div>
+  
+  </div>
+</div>
+
+<div class="split" id="right">
+<h3>..and the least</h3>
+<div class="flex-container">
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(194)"><div class="num num_r">194</div><div class="name name_r">Tuvalu</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(193)"><div class="num num_r">193</div><div class="name name_r">Marshall Islands</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(192)"><div class="num num_r">192</div><div class="name name_r">Seychelles</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(191)"><div class="num num_r">191</div><div class="name name_r">Kiribati</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(190)"><div class="num num_r">190</div><div class="name name_r">Tonga</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(189)"><div class="num num_r">189</div><div class="name name_r">Maldives</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(188)"><div class="num num_r">188</div><div class="name name_r">Cabo Verde</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(187)"><div class="num num_r">187</div><div class="name name_r">Equatorial Guinea</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(186)"><div class="num num_r">186</div><div class="name name_r">Vanuatu</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(185)"><div class="num num_r">185</div><div class="name name_r">Malaysia</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(184)"><div class="num num_r">184</div><div class="name name_r">F.S.Micronesia</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(183)"><div class="num num_r">183</div><div class="name name_r">Gambia</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(182)"><div class="num num_r">182</div><div class="name name_r">Comoros</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(181)"><div class="num num_r">181</div><div class="name name_r">Cuba</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(180)"><div class="num num_r">180</div><div class="name name_r">Mozambique</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(179)"><div class="num num_r">179</div><div class="name name_r">Togo</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(178)"><div class="num num_r">178</div><div class="name name_r">The Bahamas</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(177)"><div class="num num_r">177</div><div class="name name_r">Benin</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(176)"><div class="num num_r">176</div><div class="name name_r">Mauritius</div></button></div>
+  <div class="buttonbox"><button class='buttons' type="button" onclick="goTo(175)"><div class="num num_r">175</div><div class="name name_r">USA</div></button></div>
+</div>
+</div>
+</div>
+
+
+
+<script type="text/javascript" src="files/cities.js"></script>
+<script type="text/javascript" src="files/end_points.js"></script>
+<script type="text/javascript" src="files/lines.js"></script>
+<script type="text/javascript" src="files/countries.js"></script>
+<script type="text/javascript" src="files/unused.js"></script>
+
+<script>
+
+
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+function openModal () {
+     modal.style.display = "block";
+	 window.scrollTo(x-coord, y-coord);
+};
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+function showNavMenu() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+
+var colorMode = 0;
+
+function changeColor() {
+if (colorMode == 0) {
+document.documentElement.style.setProperty('--color-a-dark', '#0571b0');
+document.documentElement.style.setProperty('--color-a-light', '#92c5de');
+document.documentElement.style.setProperty('--color-b-dark', '#ca0020');
+document.documentElement.style.setProperty('--color-b-light', '#f4a582');
+document.documentElement.style.setProperty('--color-water', '#f7f7f7');
+document.documentElement.style.setProperty('--color-unused', '#7f7f7f');
+document.documentElement.style.setProperty('--color-change-text', '#FFFFFF');
+document.getElementById("colorBlindSwitch").innerHTML = "Actually I'm not";
+colorMode = 1;}
+else {
+document.documentElement.style.setProperty('--color-a-dark', '#6ddccb');
+document.documentElement.style.setProperty('--color-a-light', '#bdede5');
+document.documentElement.style.setProperty('--color-b-dark', '#f96b71');
+document.documentElement.style.setProperty('--color-b-light', '#ffb7bb');
+document.documentElement.style.setProperty('--color-water', '#c7eaf1');
+document.documentElement.style.setProperty('--color-unused', '#adadad');
+document.documentElement.style.setProperty('--color-change-text', '#000000');
+document.getElementById("colorBlindSwitch").innerHTML = "Hey! I'm colour blind";
+colorMode = 0;}
+}
+
+
+
+function goTo (ranknum) {
+layers[ranknum].fireEvent('click');
+//console.log(layers[ranknum].feature.properties.country);
+//	ccmap.fitBounds(layers[ranknum].getBounds());
+}
+
+
+
+var ccmap = L.map('map',{attributionControl: false}).setView([42.3, 3.7], 3);
+
+L.control.attribution({position: 'bottomright'}).addTo(ccmap);
+
+//L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+  //  attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    //}).addTo(ccmap);
+	
+var cityMarker = {
+    radius: 5,
+    fillColor: "#FFFFFF",
+    color: "#000000",
+    weight: 3,
+    opacity: 1,
+    fillOpacity: 1
+};
+
+var centroidMarker = {
+    radius: 4,
+    fillColor: "#ff0000",
+    color: "#000000",
+    weight: 2,
+    opacity: 1,
+    fillOpacity: 1
+};
+
+function getColor(d) {
+    return d > 173 ? 'var(--color-b-dark)' :
+		   d > 97  ? 'var(--color-b-light)':
+           d > 20   ? 'var(--color-a-light)' :
+                      'var(--color-a-dark)';
+}
+
+function styleCountries(feature) {
+    return {
+        fillColor: getColor(feature.properties.rank),
+        weight: 1,
+        opacity: 1,
+        color: '#636262',
+        fillOpacity: 1
+    };
+}
+
+layers = {}
+
+var lastClick
+
+function highlightFeature(e) {
+    var layer = e.target;
+	if (lastClick) { countriesGeoJson.resetStyle(lastClick)};
+    layer.setStyle({
+        weight: 6,
+        color: '#ffac14'
+	})
+		layer.bringToFront();
+		lineslayer.bringToFront();
+		endslayer.bringToFront();
+		citieslayer.bringToFront();
+	}
+
+function onEachCountry (feature, layer) {
+	layers[feature.properties.rank] = layer;
+	layer.on(
+        "click",function(e){
+		info.update(layer.feature.properties);
+		ccmap.fitBounds(e.target.getBounds(), {padding: [100,100]});
+		highlightFeature(e);
+		lastClick = layer;
+    })
+	}
+
+var countriesGeoJson = L.geoJson(countries, {
+    style: styleCountries, onEachFeature:onEachCountry
+//})
+//.bindPopup(function (layer) {
+  //  return ('<b>'+layer.feature.properties.country+'</b><br>Distance: '+layer.feature.properties.Distance+'<br>Area covered: '+layer.feature.properties.Country_area+'<br>Rank: '+layer.feature.properties.rank+' of 194')
+}).addTo(ccmap);
+
+L.geoJson(unused, {
+    style: function (feature) {
+        return {fillColor: "var(--color-unused)",
+		weight: 0,
+        opacity: 1,
+        color: 'var(--color-unused)',
+		fillOpacity: 0.7};
+    }
+}).bindPopup(function (layer) {
+    return ('<b>'+layer.feature.properties.COUNTRY_NA+'</b><br>This area has not been included in any country allocations. See the accompanying notes for explanation.')
+}).addTo(ccmap);
+
+var lineslayer = L.geoJson(lines, {
+    style: function (feature) {
+        return {color: "#000000", weight: 5};
+    },onEachFeature: function (feature, layer) {layer.bindTooltip('In <b>'+layer.feature.properties.country+'</b>, the distance between the capital and geographic center is '+layer.feature.properties.dist_label, {permanent: false, className: "cityLabel", opacity: 0.9, offset: [0, 0] });
+	}}).addTo(ccmap);
+
+
+var endslayer = L.geoJson(end_points, {
+pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, centroidMarker);
+    },onEachFeature: function (feature, layer) {layer.bindTooltip('Geographic center of <b>'+feature.properties.country+'</b>', {permanent: false, className: "cityLabel", opacity: 0.9, offset: [0, 0] });
+	}}).addTo(ccmap);
+
+var citieslayer = L.geoJson(cities, {
+	pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, cityMarker);
+    },onEachFeature: function (feature, layer) {
+	layer.bindTooltip('<b>'+feature.properties.name+'</b>, capital of '+feature.properties.SOVEREIGNT, {permanent: false, className: "cityLabel", opacity: 0.9, offset: [0, 0] });
+	}}).addTo(ccmap);
+
+
+	
+var info = L.control({position: 'bottomleft'});
+
+info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info infoBox'); // create a div with a class "info"
+    this.update();
+    return this._div;
+};
+
+// method that we will use to update the control based on feature properties passed
+info.update = function (props) {
+    this._div.innerHTML = (props ?
+        '<b>' + props.country + '</b><br />The distance between the capital '+props.cap_name+ ' and the geographic center of '+props.country+' is ' + props.dist_label + '<br />The area of '+props.country+' used here is ' + props.area_label + '<br /><b>Overall rank: ' + props.rank + ' of 194</b>'
+        : 'Click a country');
+};
+
+info.addTo(ccmap);
+	
+
+	
+	
+var legend = L.control({position: 'topright'});
+
+legend.onAdd = function (ccmap) {
+
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 50, 150, 174],
+        labels = ['Most central','','','Least central'];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            labels[i] + '<br>';
+    }
+
+
+
+    return div;
+};
+
+legend.addTo(ccmap);
+
+</script>
+
+</body>
+</html>
