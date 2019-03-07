@@ -3,6 +3,14 @@ background-color: #222222;
 color: #FFFFFF;
 }
 
+@font-face {
+    font-family: 'ds-digitalbold';
+    src: url('files/font/ds-digib-webfont.woff2') format('woff2'),
+         url('files/font/ds-digib-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;	
+}
+
 .gallery-block{
   padding-bottom: 60px;
   padding-top: 60px;
@@ -74,14 +82,6 @@ color: #FFFFFF;
 	  max-width: 410px;
 	  margin: auto;
   }
-
-@font-face {
-    font-family: 'ds-digitalbold';
-    src: url('files/font/ds-digib-webfont.woff2') format('woff2'),
-         url('files/font/ds-digib-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;	
-}
  
   
 @media (min-width: 765px) {
