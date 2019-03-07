@@ -75,6 +75,15 @@ color: #FFFFFF;
 	  margin: auto;
   }
 
+@font-face {
+    font-family: 'ds-digitalbold';
+    src: url('files/font/ds-digib-webfont.woff2') format('woff2'),
+         url('files/font/ds-digib-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;	
+}
+ 
+  
 @media (min-width: 765px) {
 
   .gallery-block.compact-gallery .item .description {
