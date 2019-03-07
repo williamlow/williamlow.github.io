@@ -59,8 +59,9 @@ color: #FFFFFF;
 }
 
 .gallery-block.compact-gallery .item .description .description-heading{
-  font-size: 1em;
+  font-size: 2em;
   font-weight: bold;
+	font-family: "ds-digitalbold", Courier, monospace;
 }
 
 .gallery-block.compact-gallery .item .description .description-body{
