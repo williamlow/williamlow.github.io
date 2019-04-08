@@ -1,0 +1,134 @@
+
+<html>
+<head>
+  <title>Hong Kong Through Time</title>
+  <!––required in order to read chinese characters in image filenames--!>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!––maybe find these files and host locally--!>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   crossorigin=""/>
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+   integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+   crossorigin=""></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script> 
+  <link rel="stylesheet" href="../files/main_stylesheet.css">
+  <style>
+ 
+  
+
+</style>
+</head>
+
+<body>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h1>Correction submission form</h1>
+  <form id="correctionForm">
+  Name:<br>
+  <input type="text" name="username" size="35">
+  <br>
+  Email:<br>
+  <input type="email" name="email" size="35">
+  <fieldset>
+  <legend>You are submitting a correction for this image:</legend>
+  <div id="correctionPhoto">blank</div><br>
+  </fieldset>
+  <fieldset>
+  <legend>Road/building name</legend>
+  Current name:<br>
+  <input class="readonly" type="text" name="orig_loc_name" value="import from marker" size="60" readonly> <br>
+  Correction:<br>
+  <input type="text" name="new_loc_name" size="60"><br>
+  </fieldset>
+  
+  <fieldset>
+  <legend>Date taken</legend>
+  Current date:<br>
+  <input class="readonly" type="text" name="orig_old_date" value="import from marker" size="35" readonly> <br>
+  Correction:<br>
+  <input type="text" name="new_old_date" value="eg. 1972, 1970s, circa 1975" onfocus="this.value=''" size="35"><br>
+  </fieldset>
+
+  <fieldset>
+  <legend>Location</legend>
+  <div id="correctionMapContainer">
+  <div id="correctionMap"></div>
+  </div>
+  Current coordinates:<br>
+  <input class="readonly" type="text" name="orig_coords" value="import from marker" size="50" readonly > <br>
+  Correction:<br>
+  <input class="readonly" type="text" name="new_coords" value="Click map to update location" size="50" readonly><br>
+  </fieldset>
+
+  <input id="submitButton" type="submit" value="Submit">
+  </form>
+  </div>
+
+</div>
+    	<div class="header">
+		<div class="title">
+		<h1 class="maintitle">Hong Kong <span style="color:var(--main-accent-color)">Through Time:</span></h1>
+			</div>
+		<div class="topnav" id="myTopnav">
+			  <a href="HKTT_main.html" class="active">Home</a>
+			  <a href="top_20_images.html">Top 20 images</a>
+			  <a href="Who_is_HK_Man.html">Who is HK Man?</a>
+			  <a href="About_Contact.html">About and Contact</a>
+			  <a href="../ch/HKTT_main.html">漢字<img class="lang_icon" src="../files/lang_HK_CH.png"></a>
+			  <a href="javascript:void(0);" class="icon" onclick="showNavMenu()">
+				<i class="fa fa-bars"></i>
+			  </a>
+			</div>
+		<div class="sub-title">The then and now photography of HK Man
+			</div>
+		</div>
+<section class="container">
+  <div class="left-half">
+  <!-- Trigger/Open The Modal -->
+		<div id="introText"><p>These photos were taken by an anonymous Flickr poster called <a href="https://www.flickr.com/photos/old-hk/" target="_blank">HK man</a>. From January 2007 to October 2011 he assembled more than 1000 then-and-now photographs of Hong Kong. His collection is notable for its size, and how well aligned the old and new photographs are. They provide an incredible record of architectural change in Hong Kong.</p><p>HK Man’s account is no longer in use, and efforts to contact him have failed. Changes to Flickr’s allowance means that some of these images will soon be lost. In response to this, and a fear that the collection could one day disappear altogether, they have been saved and uploaded here. </p><p>All images have been assigned a location from their title. Some will be incorrect, and many are missing dates for the original photographs. If you would like to correct a location or provide an estimated date for an image, a link is provided inside each map popup. </p><p>Finally, if anyone knows who HK Man is, please <a href="About_Contact.html">get in touch</a>. </p><p>To get started, click a marker or select one at random with the button below. </p></div>
+  	    <div id="infobox" class="imagebox">Loading...</div>
+  <div class="footer">
+  		<button class='button hiddenbutton' id="prev" type="button">Previous</button>
+		<button class='button' id="random" type="button">Random</button>
+		<button class='button hiddenbutton' id="next" type="button">Next</button>
+  </div>
+  </div>
+  <div class="right-half">
+			<div id="map"></div>
+  </div>
+</section>
+
+  
+<script type="text/javascript" src="../files/HKTT_data.js"></script>
+
+<script type="text/javascript" src="../files/map_script.js"></script>
+
+  <script>
+  
+
+
+function showNavMenu() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+
+
+ 
+ 
+ 
+ 
+  </script>
+</body>
+</html>
+	
