@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Land cover analysis</title>
+	
+<style>
+
+figure {
+max-width: 100%;
+}
+
+.fixed-nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 40px;
+  background-color: #e6e6e6;
+  text-align: center;
+  padding: 5px;
+}
+
+.main-window {
+margin-top: 60px;
+}
+
+@media only screen and (max-width: 600px) {
+	table {
+	font-size: 0.8rem;
+	}
+}
+
+
+
+</style>
+</head>
+<body>
+<nav class="fixed-nav-bar">
+<a href="https://williamlow.github.io/">Back to the main page</a>
+</nav>
+<div class="container main-window">
+<h2>Assessing the impact of a hydropower project on land cover through remote sensing</h2>
+<br>
+<p>In mid 2017 a proposed hydropower project in north-west Myanmar required an assessment of potential environmental impact. Four different levels of dam were considered, each of which would lead to varying amount of water inundation upriver of the new dam. Remote sensing data was used to provide an initial assessment of the types and amount of land cover that would be affected by this increased water level.</p>
+<p>This assessment made use of the <a href="https://fromgistors.blogspot.com/p/semi-automatic-classification-plugin.html">Semi-Automatic Classification plugin</a> for QGIS, by Congedo Luca. This is an incredible resource for QGIS users, and various tutorials are available on Luca’s site.</p>
+<p>The hydropower company provided shapefiles of the four projected levels of potential water inundation along the river, based on an earlier assessment. As the dam size increases, the water level rises further above the existing banks, and the consequences are spread further up the river.</p>
+
+<div class="row justify-content-center">
+    <div class="col-md-auto text-center">
+	<figure class="figure">
+<img src="files/0_reservoir_shapes.png" class="img-fluid" alt="True colour imagery">
+	  <figcaption class="figure-caption">The four potential scenarios, showing the potential effect on the river</figcaption>
+</figure>
+</div>
+</div>
+
+<p>To determine land cover for the affected areas, the SCP plugin was used to analyse satellite imagery from the Sentinel-2 satellite. Part of the European Space Agency’s Copernicus Programme, this data is available to the public through the programme’s <a href="https://scihub.copernicus.eu/dhus/#/home">open data hub</a>. Since cloud cover in the relevant section of Myanmar increases dramatically during the rainy season, the last available image with low cloud cover was used, in this case from the 18th of February 2017.</p>
+<p>Besides RGB values allowing simple true colour imagery down to a 10m resolution, the Sentinel platform has various other spectral bands available. This allows analysis of the spectral characteristics of land cover, not normally visible to the human eye. A typical use of this is to calculate the Generated Normalized Difference Vegetation Index (NDVI), showing the health of vegetation. For example, the below extract shows true colour imagery, and then a combination of Sentinel 2’s red, near infrared and shortwave infrared bands.</p>
+
+<div class="row justify-content-center">
+    <div class="col-sm-auto text-center">
+	<figure class="figure">
+      <img src="files/1_true_colour.jpg" class="img-fluid" alt="True colour imagery">
+	  <figcaption class="figure-caption">True colour imagery</figcaption>
+</figure>
+    </div>
+    <div class="col-sm-auto text-center">
+		<figure class="figure">
+      <img src="files/2_bands_3_7_10.jpg" class="img-fluid" alt="Sentinel bands 3, 7 and 10">
+	  <figcaption class="figure-caption">The same scene using non RGB spectral bands</figcaption>
+</figure>
+    </div>
+  </div>
+
+
+<p>The SCP plugin must be trained to recognize the spectral characteristics of different land cover types – this involves selected areas where the land cover type is known, and registering them as reference points for the analysis.</p>
+<p>Five categories were used for this analysis: cleared ground, low density vegetation, high density vegetation (forest), riverbank and water. The detection of villages and minor outbuildings is challenging in this region due to very low urban density, broad spectral ranges due to materials used, and the fact that buildings are usually closely interspersed with low and high density vegetation. Buildings in this analysis mainly contribute to the cleared ground category.</p>
+<p>The land cover of the entire area is then classified according to these reference values. This raster file is then clipped according to the four different scenarios.</p>
+
+<div class="row justify-content-center">
+    <div class="col-sm-auto text-center">
+			<figure class="figure">
+      <img src="files/3_categorised_land_cover_raster.jpg" class="img-fluid" alt="Categorised land cover raster">
+	  	  <figcaption class="figure-caption">The categorised land cover raster</figcaption>
+</figure>
+    </div>
+    <div class="col-sm-auto text-center">
+			<figure class="figure">
+      <img src="files/4_clipped_raster.jpg" class="img-fluid" alt="Clipped raster">
+	  	  <figcaption class="figure-caption">Clipped to the river shapefile</figcaption>
+</figure>
+    </div>
+  </div>
+
+
+
+<p>These individual rasters can then be analysed to determine the type and amount of land cover types that would be affected by the increased water level. The results were as follows:</p>
+
+<table class="table table-sm table-striped">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Scenario 1 (smallest)</th>
+      <th scope="col">Scenario 2</th>
+      <th scope="col">Scenario 3</th>
+	  <th scope="col">Scenario 4 (largest)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Riverbank</th>
+      <td>3.5</td>
+      <td>9.8</td>
+      <td>13.2</td>
+	  <td>17.8</td>
+    </tr>
+    <tr>
+      <th scope="row">Cleared ground</th>
+      <td>2.2</td>
+      <td>5.6</td>
+      <td>9.1</td>
+      <td>16.6</td>
+    </tr>
+    <tr>
+      <th scope="row">Low density vegetation</th>
+      <td>2</td>
+      <td>13.5</td>
+      <td>32.3</td>
+      <td>58.9</td>
+    </tr>
+    <tr>
+      <th scope="row">High density vegetation</th>
+      <td>2.2</td>
+      <td>20.1</td>
+      <td>61.5</td>
+      <td>132.8</td>
+    </tr>	
+    <tr>
+      <th scope="row">Total inundation</th>
+      <td><b>9.9</b></td>
+      <td><b>49</b></td>
+      <td><b>116.1</b></td>
+      <td><b>226.1</b></td>
+    </tr>	
+  </tbody>
+</table>
+
+
+<p>This process is a useful and relatively simple way to make an initial assessment of the impact on land cover - using only publically available applications and data. There are however some limitations that would need to be considered as part of more detailed follow up assessment.</p>
+<p>Firstly, ground truthing should accompany this kind of remote sensing work to ensure that assumptions regarding land cover characteristics are accurate. Secondly, this analysis was based on a single satellite image from February. Seasonal changes to vegetation and shifting cultivation methods used in the area mean that the nature of land cover is likely to vary over time, meaning that category of land cover in the affected areas may not be stable.</p>
+<p>The sequence of images below shows an example of change in land cover over time.</p>
+
+<div class="row justify-content-center">
+    <div class="col-sm-auto text-center">
+		<figure class="figure">
+      <img src="files/5a_Jan2016.jpg" class="img-fluid" alt="Land cover Jan 2016">
+	  	  <figcaption class="figure-caption">January 2016</figcaption>
+</figure>
+    </div>
+    <div class="col-sm-auto text-center">
+		<figure class="figure">
+      <img src="files/5b_Jan2017.jpg" class="img-fluid" alt="Land cover Jan 2017">
+	  	  <figcaption class="figure-caption">January 2017</figcaption>
+</figure>
+    </div>
+	<div class="col-sm-auto text-center">
+		<figure class="figure">
+      <img src="files/5c_Feb2017.jpg" class="img-fluid" alt="Land cover Feb 2017">
+	  	  <figcaption class="figure-caption">February 2017</figcaption>
+</figure>
+    </div>
+  </div>
+
+
+<p>In January 2016 cleared ground is visible near to the river. One year later these areas have begun to regrow, and activity has shifted to newly cleared ground to the west. Just one month later these areas have further expanded, but the area in general has seen an increase in what appears to be lower density vegetation, potentially due to the increased heat of the season. These changes need to be understood to ensure that analysis is accurate.</p>
+<p>Thanks again to Congedo Luca for the SCP plugin.</p>
+<p>For other projects, return to the <a href="https://williamlow.github.io/">main page</a>.</p>
+
+</div>
+</body>
+</html>
