@@ -82,7 +82,7 @@ here</a>.
 </div>
 </div>
 
-<p>Booth’s maps showed the houses and streets of London colour-coded with seven categories. Figure 1 shows an extract from one of the maps, and figure 2 shows the Booth’s visual scale. Despite their name the maps do not just display poverty, but rather relative wealth at both ends of the scale. And though the language used in the category labels makes frequent mention of class (and is rather Victorian in tone), Booth’s categorisation was based on a variety of factors including employment status, regularity of income and type of occupation.</p>
+<p>Booth’s poverty maps showed the houses and streets of London colour-coded with seven categories. Above is an extract from one of the maps, and below it are Booth's seven categories. Despite their name the maps do not just display poverty, but rather relative wealth at both ends of the scale, and although the language used in the category labels makes frequent mention of class (and is rather Victorian in tone), Booth’s categorisation was based on a variety of factors including employment status, regularity of income and type of occupation.</p>
 <p>Inevitably there are shortcomings to Booth’s methodology when held up against modern standards. <a href="http://etheses.lse.ac.uk/55/1/Bales_Early_innovations_in_social_research.pdf" target="_blank">Research</a> has shown however that Booth was rigorous and consistent in his classification of data, and so we can at least rely on the study’s internal consistency. This forms the first major assumption of this analysis: that Booth’s work forms an accurate record of relative levels of wealth, and of their geographic distribution.
 </p>
 
@@ -110,7 +110,7 @@ here</a>.
 
 <h4>Doing it the hard way</h4>
 
-<p>One day we will be able to pass these scanned maps to an algorithm that will hand back perfectly formed vectors, labelled with the correct category. Unfortunately that day is not today. After various experiments with adjusting the image for use with existing applications that attempt this automated approach, and reviewing open source projects who have had success with automation, it became clear that the only immediately practical means of vectorising the maps was manually.</p>
+<p>One day we will be able to pass these scanned maps to an algorithm that will hand back perfectly formed vectors, labelled with the correct category. Unfortunately that day is not today. After various experiments with adjusting the image for use with existing applications that attempt this automated approach, and reviewing open source projects that have had <a href="https://github.com/nypl-spacetime/map-vectorizer" target="_blank">success</a> with automation, it became clear that the only immediately practical means of vectorising the maps was manually.</p>
 <p>The vectorisation process took at least 45 hours to complete in <a href="https://qgis.org/en/site/" target="_blank">QGIS</a>, and eight of the twelve Booth maps were fully or partially covered. The City of London area was note surveyed by Booth and so appears as a blank space in the dataset.</p>
 <p>The dataset comprises 11,539 polygons, and each has an attribute describing its Booth colouring. Manual work like this is very vulnerable to human error, so various automated and further manual checks were made of the data to catch these mistakes.</p>
 
@@ -123,7 +123,7 @@ here</a>.
 </div>
 </div>
 
-<h4>Spatial analysis of Booth data</h4>
+<h4>Spatial analysis of the Booth data</h4>
 
 <p>In order to determine the relationship between our Booth data and modern patterns of affluence, the two datasets needed to describe the same geographical areas. Modern data is not typically available at the household level, so the Booth data had to be aggregated to modern geographical areas that we have relevant data for. In this case we used <a href="https://www.ons.gov.uk/methodology/geography/ukgeographies/censusgeography#super-output-area-soa" target="_blank">
 Medium Super Output Areas</a>, generated from the 2001 census and intended to form stable geographical units for reporting statistics over time. A GIS workflow was then used to split apart the Booth data polygons and reattribute them to each MSOA, shown in the flowchart below.</p>
@@ -133,11 +133,11 @@ Medium Super Output Areas</a>, generated from the 2001 census and intended to fo
     <tr>
       <td style="text-align:center">Dissolve the digitized polygons according to their category attribute, producing seven multipart polygons
 	  <br>
-	  <span style="font-size: 250%">&#10225;</span>
+	  <span style="font-size: 250%">&dArr;</span>
 	  <br>
 	  Intersect the multipart polygons with the MSOA polygon data, resulting in separate multipart polygons for each category within each MSOA
 	  <br>
-	  <span style="font-size: 250%">&#10225;</span>
+	  <span style="font-size: 250%">&dArr;</span>
 	  <br>
 	  Calculate the area of multipart polygons within each MSOA
 </td>
