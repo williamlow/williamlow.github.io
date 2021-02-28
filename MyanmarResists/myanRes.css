@@ -192,14 +192,15 @@ position: absolute;
 }
 
 .mobLink {
-font-family: Arial Black, 'Roboto', Arial Bold, Gadget, sans-serif; font-size: 1em; font-variant: normal; font-weight: 900; color:#b33234;text-decoration: underline;
+font-family: 'Roboto', Arial Bold, Gadget, sans-serif; font-size: 1em; font-variant: normal; font-weight: 900; color:#b33234;text-decoration: underline; font-style: italic;
+
 }
 
 .moblinkHightlight {
 background-color: white;
 height: 5vh;
 width: 80%;
-transform: skewX(-15deg);
+transform: skewX(-16deg);
 box-shadow: 5px 5px;
 }
 
@@ -238,12 +239,12 @@ margin: 5px auto 5px auto
 
 @media screen and (max-width: 500px) {
 .moblinkHightlight {width:90%}
-.mobLink {font-size: 3.5vw;}
+.mobLink {font-size: 3.8vw;}
 }
 
 @media screen and (max-width: 430px) {
 	#subHead {font-size:0.7rem;}
-	#titleText {font-size:6vw}
+	#titleText {font-size:9vw}
 }
 
 /* No greater than 900px, no less than 400px */
