@@ -382,10 +382,10 @@ for (var i = 0; i < districts.length; i++) {
 
 $.fancybox.defaults.loop = "true";
 
-$.fancybox.defaults.mobile.clickContent = "closeFancy()";
-$.fancybox.defaults.mobile.clickSlide = "closeFancy()";
+//$.fancybox.defaults.mobile.clickContent = "closeFancy()";
+//$.fancybox.defaults.mobile.clickSlide = "closeFancy()";
 
-              //$.fancybox.defaults.mobile.clickSlide = function(current) {return 'close';}
+$.fancybox.defaults.mobile.clickSlide = function(current) {return 'close';}
 
 //$.fancybox.defaults.mobile: {
   //              preventCaptionOverlap: !1,
