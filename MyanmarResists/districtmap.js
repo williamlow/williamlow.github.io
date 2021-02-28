@@ -382,10 +382,10 @@ for (var i = 0; i < districts.length; i++) {
 
 $.fancybox.defaults.loop = "true";
 
-//$.fancybox.defaults.mobile.clickContent = "close";
-//$.fancybox.defaults.mobile.clickSlide = "close";
+//$.fancybox.defaults.mobile.clickContent = "closeFancy()";
+//$.fancybox.defaults.mobile.clickSlide = "closeFancy()";
 
-$.fancybox.defaults.mobile.clickSlide = function(current) {return 'close';}
+              //$.fancybox.defaults.mobile.clickSlide = function(current) {return 'close';}
 
 //$.fancybox.defaults.mobile: {
   //              preventCaptionOverlap: !1,
@@ -398,7 +398,7 @@ $.fancybox.defaults.mobile.clickSlide = function(current) {return 'close';}
                 //},
 
 //$.fancybox.defaults.mobile.preventCaptionOverlap = "!1";
-$.fancybox.defaults.mobile.idleTime = "!1";
+$.fancybox.defaults.mobile.idleTime = "!0.2";
 //$.fancybox.defaults.mobile.clickContent = "function (t, e) {return \"image\" === t.type && \"close\";}";
 //$.fancybox.defaults.mobile.preventCaptionOverlap = "function (t, e) {return \"image\" === t.type && \"close\";";
 
