@@ -382,6 +382,11 @@ for (var i = 0; i < districts.length; i++) {
 
 $.fancybox.defaults.loop = "true";
 
+$('[data-fancybox]').fancybox({
+  clickContent : function( current, event ) {
+    return current.type === 'image' ? 'zoom' : 'close';
+  }
+});
 
 //$(".clickCloseFancy").bind("click", function() {
 //  console.log("hi");
