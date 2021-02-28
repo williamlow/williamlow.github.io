@@ -387,16 +387,20 @@ $.fancybox.defaults.loop = "true";
 
 //$.fancybox.defaults.mobile.clickSlide = function(current) {return 'close';}
 
-$.fancybox.defaults.mobile: {
-                preventCaptionOverlap: !1,
-                idleTime: !1,
-                clickContent: function (t, e) {
-                    return "image" === t.type && "close";
-                },
-                clickSlide: function (t, e) {
-                    return "image" === t.type && "close";
-                },
+//$.fancybox.defaults.mobile: {
+  //              preventCaptionOverlap: !1,
+    //            idleTime: !1,
+      //          clickContent: function (t, e) {
+        //            return "image" === t.type && "close";
+          //      },
+            //    clickSlide: function (t, e) {
+              //      return "image" === t.type && "close";
+                //},
 
+$.fancybox.defaults.mobile.preventCaptionOverlap = "!1";
+$.fancybox.defaults.mobile.idleTime = "!1";
+$.fancybox.defaults.mobile.clickContent = "function (t, e) {return \"image\" === t.type && \"close\";}";
+$.fancybox.defaults.mobile.preventCaptionOverlap = "function (t, e) {return \"image\" === t.type && \"close\";";
 
 //$(".clickCloseFancy").bind("click", function() {
 //  console.log("hi");
