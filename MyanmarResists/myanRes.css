@@ -10,8 +10,28 @@ body, html {
   height: 100%;
   width: 100%;
   margin: 0;
+     padding:0; /* remove default padding */
 }
 
+
+
+			  .screen {
+                font-size: 0.5em;
+                margin: 0;
+                background-color: red;
+                position: absolute;
+                width: 100% /* BenM mentioned this in answer*/
+                height: 100%; /* take full browser height */
+                left: 0;
+                top: 0;
+            }
+			
+			  .screen .main {
+                width: 100%; /* <--now this takes full browser dimension  */
+                height: 100%; /* <--now this takes full browser dimension  */
+            }
+			
+			
 .full-screen-div {
     width: 100vw;
     height: 100%;
