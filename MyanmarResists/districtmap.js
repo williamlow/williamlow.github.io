@@ -382,10 +382,21 @@ for (var i = 0; i < districts.length; i++) {
 
 $.fancybox.defaults.loop = "true";
 
-$.fancybox.defaults.mobile.clickContent = "close";
-$.fancybox.defaults.mobile.clickSlide = "close";
+//$.fancybox.defaults.mobile.clickContent = "close";
+//$.fancybox.defaults.mobile.clickSlide = "close";
 
-$.fancybox.defaults.mobile.clickSlide = function(current) {return 'close';}
+//$.fancybox.defaults.mobile.clickSlide = function(current) {return 'close';}
+
+$.fancybox.defaults.mobile: {
+                preventCaptionOverlap: !1,
+                idleTime: !1,
+                clickContent: function (t, e) {
+                    return "image" === t.type && "close";
+                },
+                clickSlide: function (t, e) {
+                    return "image" === t.type && "close";
+                },
+
 
 //$(".clickCloseFancy").bind("click", function() {
 //  console.log("hi");
