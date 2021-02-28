@@ -234,10 +234,3 @@ margin: 5px auto 5px auto
 @media (max-width:992px) and (min-width:768px) {
     #subHead {left:14vw;}
 }​
-
-
-/* fancybox close on mobile */
-mobile : {
-    clickContent : "close",
-    clickSlide : "close"
-}
