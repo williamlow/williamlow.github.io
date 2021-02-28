@@ -3,6 +3,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,900&display=swap');
 
+html, body{min-height:100%;}
+body{height:100vh;}
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -73,7 +76,7 @@
     color: white;
 }
 	
-	#map {height: 77vh;
+	#map {height: 82vh;
 		margin: 0 auto 0 auto;	
 		}
 	body {background-color: #b33234;}
@@ -232,6 +235,9 @@ margin: 5px auto 5px auto
     #subHead {left:14vw;}
 }​
 
-.testC {
-	background-color: blue;
+
+/* fancybox close on mobile */
+mobile : {
+    clickContent : "close",
+    clickSlide : "close"
 }

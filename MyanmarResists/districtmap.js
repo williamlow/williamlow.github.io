@@ -382,6 +382,7 @@ for (var i = 0; i < districts.length; i++) {
 
 $.fancybox.defaults.loop = "true";
 
+
 //$(".clickCloseFancy").bind("click", function() {
 //  console.log("hi");
 //  $.fancybox.close(true);
