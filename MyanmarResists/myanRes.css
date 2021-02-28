@@ -43,7 +43,7 @@
 .closeModal {
     color: white;
     float: right;
-	font-family: Arial Black, Arial Bold, Gadget, sans-serif; font-size: 2vh; font-style: italic; font-variant: normal; font-weight: 400; 
+	font-family: Arial Black, 'OPTIAlpine-BoldItalic', Arial Bold, Gadget, sans-serif; font-size: 2vh; font-style: italic; font-variant: normal; font-weight: 700; 
 	margin: 5px;
 	cursor: pointer;
 }
@@ -110,7 +110,7 @@ font-family: 'Roboto', sans-serif;
 }
    
 #titleText {
-font-family: Arial Black, Arial Bold, Gadget, sans-serif; font-size: 4.5vh; font-style: italic; font-variant: normal; font-weight: 400; line-height: 1;margin:2vh auto 2vh auto; text-align: center;
+font-family: Arial Black, 'OPTIAlpine-BoldItalic', Arial Bold, Gadget, sans-serif; font-size: 4.5vh; font-style: italic; font-variant: normal; font-weight: 700; line-height: 1;margin:2vh auto 2vh auto; text-align: center;
 
 }   
 
@@ -121,11 +121,11 @@ position: absolute;
 }   
 
 .captionText {
-  font-family: Arial Black, Arial Bold, Gadget, sans-serif; font-size: 3vh; font-style: italic; font-variant: normal; font-weight: 400;
+  font-family: Arial Black, 'OPTIAlpine-BoldItalic', Arial Bold, Gadget, sans-serif; font-size: 3vh; font-style: italic; font-variant: normal; font-weight: 700;
   }
 
 .subTitles{
-  font-family: Arial Black, Arial Bold, Gadget, sans-serif; font-size: 2.5vh; font-style: italic; font-variant: normal; font-weight: 400; text-align:center;
+  font-family: Arial Black, 'OPTIAlpine-BoldItalic', Arial Bold, Gadget, sans-serif; font-size: 2.5vh; font-style: italic; font-variant: normal; font-weight: 700; text-align:center;
   }
 
 	
@@ -162,12 +162,12 @@ position: absolute;
   right: 50%;
   color: white;
   font-style: italic;
-  font-family: Arial Black, Arial Bold, Gadget, sans-serif;
+  font-family: Arial Black, 'OPTIAlpine-BoldItalic', Arial Bold, Gadget, sans-serif;
   max-width: 250px
 }
 
 .mobLink {
-font-family: Arial Black, Arial Bold, Gadget, sans-serif; font-size: 1em; font-variant: normal; font-weight: 400; color:#b33234;text-decoration: underline;
+font-family: Arial Black, 'OPTIAlpine-BoldItalic', Arial Bold, Gadget, sans-serif; font-size: 1em; font-variant: normal; font-weight: 700; color:#b33234;text-decoration: underline;
 }
 
 .moblinkHightlight {
@@ -228,3 +228,15 @@ margin: 5px auto 5px auto
 
 path {cursor: pointer;}
 
+@font-face {
+    font-family: 'OPTIAlpine-BoldItalic';
+    src:url('OPTIAlpine-BoldItalic.woff') format('woff'),
+        url('OPTIAlpine-BoldItalic.woff2') format('woff2'),
+        url('OPTIAlpine-BoldItalic.eot'),
+        url('OPTIAlpine-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('OPTIAlpine-BoldItalic.otf') format('truetype');
+
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
