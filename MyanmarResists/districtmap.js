@@ -385,6 +385,8 @@ $.fancybox.defaults.loop = "true";
 $.fancybox.defaults.mobile.clickContent = "close";
 $.fancybox.defaults.mobile.clickSlide = "close";
 
+$.fancybox.defaults.mobile.clickSlide = function(current) {return 'close';}
+
 //$(".clickCloseFancy").bind("click", function() {
 //  console.log("hi");
 //  $.fancybox.close(true);
