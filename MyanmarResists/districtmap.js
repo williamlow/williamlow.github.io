@@ -324,6 +324,12 @@ var Lashio = rsr.path("m 590.57,450.77 -5.45,1.64 -3.64,7.17 0.84,11.42 -6,2.43 
 Lashio.attr({'stroke-width': '3','stroke-opacity': '1', "stroke": "#FFFFFF", 'fill': '#000000'}).data({'id': 'Lashio','region': 'Northern Shan'});
 districts.push(Lashio);
 
+
+
+closeFancy = function () {
+	$.fancybox.close(true);
+}
+
 // 
 for (var i = 0; i < districts.length; i++) {
 
@@ -346,7 +352,7 @@ for (var i = 0; i < districts.length; i++) {
 
 	if (!gapList.includes(x)) {
 	districts[i].attr({"fillfit": "url(images/thumbs/" + x + ".jpg)", "stroke": "white", 'stroke-width': '3' });
-	{$( "<a id=\""+idNoSpace+"\" href=\"images/fullRes/"+link+".jpg\" data-fancybox=\"gallery\" data-caption=\"<div class='d-flex justify-content-center' style='overflow:hidden'><span class='subTitles highlight'>"+x+", "+districts[i].data('region')+"</span><div>\">Z</a>").appendTo( "#linkBox" );}
+	{$( "<a id=\""+idNoSpace+"\" href=\"images/fullRes/"+link+".jpg\" data-fancybox=\"gallery\" data-caption=\"<div class='d-flex justify-content-center' style='overflow:hidden' onmousedown='closeFancy()'><span class='subTitles highlight'>"+x+", "+districts[i].data('region')+"</span><div>\">Z</a>").appendTo( "#linkBox" );}
 	
 	districts[i].mousedown(function(e){
 	z = this.data('id').replace(/ /g, '')
@@ -376,6 +382,14 @@ for (var i = 0; i < districts.length; i++) {
 
 $.fancybox.defaults.loop = "true";
 
+//$(".clickCloseFancy").bind("click", function() {
+//  console.log("hi");
+//  $.fancybox.close(true);
+//});
+ // $("#testC").click(function(){
+ //   alert("The paragraph was clicked.");
+  //})
+
 	//$(".makeClickable a").fancybox({animationEffect : 'fade'}).attr('data-fancybox', 'group1');
 	
 // Get the button that opens the modal
@@ -389,7 +403,7 @@ var spans = document.getElementsByClassName("closeModal");
 
 // When the user clicks the button, open the modal
 for (var i = 0; i < btn.length; i++) {
- btn[i].onclick = function(e) {
+ btn[i].onmousedown = function(e) {
     e.preventDefault();
     modal = document.querySelector(e.target.getAttribute("href"));
     modal.style.display = "block";
@@ -398,7 +412,7 @@ for (var i = 0; i < btn.length; i++) {
 
 // When the user clicks on <span> (x), close the modal
 for (var i = 0; i < spans.length; i++) {
- spans[i].onclick = function() {
+ spans[i].onmousedown = function() {
     for (var index in modals) {
       if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
     }
@@ -406,7 +420,7 @@ for (var i = 0; i < spans.length; i++) {
 }
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+window.onmousedown = function(event) {
     if (event.target.classList.contains('modal')) {
      for (var index in modals) {
       if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
