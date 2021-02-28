@@ -1,4 +1,4 @@
-var rsr = Raphael('map', '100%', '100%');
+var rsr = Raphael('map', '100%', '90%');
 //rsr.setViewBox(0,0,800,1676)
 rsr.setViewBox(0, 0, 800, 1676, true);
 
