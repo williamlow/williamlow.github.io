@@ -9,7 +9,7 @@ body{height:100vh;}*/
 
 body, html {
 	height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
+  height: calc(var(--vh, 1vh) * 100) !important;
   width: 100%;
   margin: 0;
      padding:0; /* remove default padding */
@@ -94,7 +94,7 @@ body, html {
     color: white;
 }
 	
-	#map {height: 100%;
+	#map {height: 90%;
 		margin: 0 auto 0 auto;	
 		}
 	body {background-color: #b33234;}
@@ -253,3 +253,8 @@ margin: 5px auto 5px auto
 @media (max-width:992px) and (min-width:768px) {
     #subHead {left:14vw;}
 }​
+
+.fancybox-active {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+}
