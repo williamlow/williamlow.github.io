@@ -352,7 +352,7 @@ for (var i = 0; i < districts.length; i++) {
 
 	if (!gapList.includes(x)) {
 	districts[i].attr({"fillfit": "url(images/thumbs/" + x + ".jpg)", "stroke": "white", 'stroke-width': '3' });
-	{$( "<a id=\""+idNoSpace+"\" href=\"images/fullRes/"+link+".jpg\" data-fancybox=\"gallery\" data-caption=\"<div class='d-flex justify-content-center' style='overflow:hidden' onmousedown='closeFancy()' touchstart='closeFancy()'><span class='subTitles highlight'>"+x+", "+districts[i].data('region')+"</span><div>\">Z</a>").appendTo( "#linkBox" );}
+	{$( "<a id=\""+idNoSpace+"\" href=\"images/fullRes/"+link+".jpg\" data-fancybox=\"gallery\" data-caption=\"<div class='d-flex justify-content-center' style='overflow:hidden' onmousedown='closeFancy()' touchend='closeFancy()'><span class='subTitles highlight'>"+x+", "+districts[i].data('region')+"</span><div>\">Z</a>").appendTo( "#linkBox" );}
 	
 	districts[i].mousedown(function(e){
 	z = this.data('id').replace(/ /g, '')
