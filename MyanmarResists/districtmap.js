@@ -460,4 +460,14 @@ window.addEventListener('resize', () => {
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 });
-	
+
+
+var terms = ["*No photographs doesn't mean no protests*", "*Click a district to see the photos*"]; //array of terms to rotate
+
+function rotateTerm() {
+  var ct = $("#subHead").data("term") || 0;
+  $("#subHead").data("term", ct == terms.length -1 ? 0 : ct + 1).text(terms[ct])
+              .fadeIn().delay(2000).fadeOut(200, rotateTerm);
+}
+
+rotateTerm();
