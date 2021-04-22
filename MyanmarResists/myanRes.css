@@ -19,6 +19,9 @@ body, html {
 	height: 100%;
 }
 
+.mainCol {
+	height:93%;
+}
 
 			
 			
@@ -236,6 +239,7 @@ margin: 5px auto 5px auto
     #map {height:90%}
 	.container {
     max-width: 1100px;}
+	.mainCol {height:100%;}
 
 }
 
