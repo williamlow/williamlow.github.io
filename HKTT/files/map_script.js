@@ -34,8 +34,13 @@ var correctionMap
 function getCorrectionMap() {
 var correctionMap = L.map('correctionMap').setView([e_current.lat, e_current.long], 14);
 
-L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, <a href="http://stamen.com">Stamen Design</a>'
-    }).addTo(correctionMap);
+var Stamen_Terrain = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 18,
+	ext: 'png'
+}).addTo(correctionMap);
 
 
 var oldMarker = L.marker([e_current.lat, e_current.long], {icon: correctionIcon}).addTo(correctionMap);
@@ -96,9 +101,17 @@ var correctionIcon = L.icon({
   var map = L.map('map').setView([22.293701, 114.172459], 14);
 
   // load a tile layer
-  //get a more interesting basemap
-L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, <a href="http://stamen.com">Stamen Design</a>'
-    }).addTo(map);
+// L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, <a href="http://stamen.com">Stamen Design</a>'
+    // }).addTo(map);
+
+L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 20,
+	ext: 'png'
+}).addTo(map);
+
 
 var e_current
 var currentPhoto = 0;
