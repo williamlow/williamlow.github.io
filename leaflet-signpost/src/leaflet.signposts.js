@@ -41,7 +41,7 @@ var signpostsLoc = ['topx75','y25right','y75right','bottomAdjx75','bottomAdjx25'
 var signpostsRot = [22.5, 67.5, 112.5, 157.5, 202.5, 247.5, 292.5, 337.5];
 
 for (var i in signposts) {
-let name = signposts[i]+"control"; // eg. NNWcontrol
+var name = signposts[i]+"control"; // eg. NNWcontrol
 window[name]  = L.control({position: signpostsLoc[i]}); // Creates an new L.control object and puts it in the position from the array
 
 // Adds a div with classes to allow later targeting, and populates it with the directional arrow, and a span that will hold the count value. If choosing to hide the signposts at first, an new class could be added here to do so.
@@ -144,7 +144,7 @@ function pointsCheck() {
 
 		document.getElementById(signposts[i]).innerHTML = ptsWithin; // Finds the span in the target signpost and updates the count. jQuery alternative $('#'+signposts[i]).text(ptsWithin);
 
-		let name = signposts[i]+"control"; // Builds the name of the L.control object eg. NNWcontrol
+		var name = signposts[i]+"control"; // Builds the name of the L.control object eg. NNWcontrol
 		if (ptsWithin == 0) { // If the count is zero, we hide the signpost by adding a CSS class. If not, we remove the class.
 			window[name]._div.classList.add('hideSignpost');
 				} else {
