@@ -410,7 +410,7 @@ var legend_links = L.control({position: 'bottomleft'});
 legend_links.onAdd = function (map) {
 
     var div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 1500, 3500, 6000, 15000, 25000],
+        grades = [0, 1500, 3500, 6000, 15000],
         labels = [];
 
 	div.innerHTML = '<h4>Agents on routes</h4>';
