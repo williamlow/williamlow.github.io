@@ -1,0 +1,170 @@
+<html>
+<head>
+
+
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
+
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-sankey.min.js"></script>
+
+<style>
+
+body {
+background-color: black;
+}
+
+#container {
+max-height: 900px;
+max-width: 900px;
+margin: auto;
+}
+
+</style>
+</head>
+<body>
+
+<div id="container"></div>
+</div>
+</body>
+
+<script>
+//Initially added a function into the sankey anychart js file to call this function when the focus node or link changed
+//Since I moved the graphs into the tooltips there's no need for it (or jquery)
+//function callChart(chart) {
+//    console.log(chart);
+//	$('#graphUpper').html('<img src="Locations/Overall/'+chart+'.png"/>')
+//	$('#graphLower').html('<img src="Locations/Overall/'+chart+'.png"/>')
+//}
+
+// create data
+var data = [
+{from: "Billiri", to: "Bali (NGA)", weight: 651, custom_field: "Billiri to Bali"},
+{from: "Billiri", to: "Gulani (NGA)", weight: 1564, custom_field: "Billiri to Gulani"},
+{from: "Billiri", to: "Biu (NGA)", weight: 1254, custom_field: "Billiri to Biu"},
+{from: "Billiri", to: "Gombi (NGA)", weight: 761, custom_field: "Billiri to Gombi"},
+{from: "Billiri", to: "Hawan_Kibu (NGA)", weight: 682, custom_field: "Billiri to Hawan_Kibu"},
+{from: "Biu", to: "Billiri (NGA)", weight: 1125, custom_field: "Biu to Billiri"},
+{from: "Biu", to: "Gulani (NGA)", weight: 2378, custom_field: "Biu to Gulani"},
+{from: "Biu", to: "Gombi (NGA)", weight: 1961, custom_field: "Biu to Gombi"},
+{from: "Biu", to: "Maiduguri (NGA)", weight: 2746, custom_field: "Biu to Maiduguri"},
+{from: "Biu", to: "Hawan_Kibu (NGA)", weight: 490, custom_field: "Biu to Hawan_Kibu"},
+{from: "Gombi", to: "Billiri (NGA)", weight: 758, custom_field: "Gombi to Billiri"},
+{from: "Gombi", to: "Biu (NGA)", weight: 2314, custom_field: "Gombi to Biu"},
+{from: "Gombi", to: "Minawao (CMR)", weight: 3076, custom_field: "Gombi to Minawao"},
+{from: "Gombi", to: "Mayo_Sava (CMR)", weight: 319, custom_field: "Gombi to Mayo_Sava"},
+{from: "Gombi", to: "Daware (NGA)", weight: 1207, custom_field: "Gombi to Daware"},
+{from: "Maiduguri", to: "Ngouboua (CHD)", weight: 1208, custom_field: "Maiduguri to Ngouboua"},
+{from: "Maiduguri", to: "Biu (NGA)", weight: 1871, custom_field: "Maiduguri to Biu"},
+{from: "Maiduguri", to: "Diffa (NER)", weight: 4770, custom_field: "Maiduguri to Diffa"},
+{from: "Maiduguri", to: "Mayo_Sava (CMR)", weight: 1262, custom_field: "Maiduguri to Mayo_Sava"},
+{from: "Maiduguri", to: "Dar_Es_Salam (CHD)", weight: 3322, custom_field: "Maiduguri to Dar_Es_Salam"},
+{from: "Maiduguri", to: "Logone_et_Chari (CMR)", weight: 4797, custom_field: "Maiduguri to Logone_et_Chari"},
+{from: "Maiduguri", to: "ISC (NGA)", weight: 2779, custom_field: "Maiduguri to ISC"},
+{from: "Maiduguri", to: "Kasaisa (NGA)", weight: 170, custom_field: "Maiduguri to Kasaisa"},
+{from: "Maiduguri", to: "Monguno (NGA)", weight: 1994, custom_field: "Maiduguri to Monguno"},
+{from: "Daware", to: "Gombi (NGA)", weight: 22, custom_field: "Daware to Gombi"},
+{from: "Daware", to: "Fufore (NGA)", weight: 272, custom_field: "Daware to Fufore"},
+{from: "Fufore", to: "Daware (NGA)", weight: 140, custom_field: "Fufore to Daware"},
+{from: "ISC", to: "Maiduguri (NGA)", weight: 2701, custom_field: "ISC to Maiduguri"},
+{from: "ISC", to: "Logone_et_Chari (CMR)", weight: 2941, custom_field: "ISC to Logone_et_Chari"},
+{from: "Monguno", to: "Maiduguri (NGA)", weight: 2179, custom_field: "Monguno to Maiduguri"},
+{from: "Monguno", to: "Ngouboua (CHD)", weight: 641, custom_field: "Monguno to Ngouboua"}
+];
+
+// create a chart and set the data
+var chart = anychart.sankey(data);
+
+// set the width of nodes
+chart.nodeWidth("45%");
+
+chart.node().normal().labels().fontSize(12);
+chart.node().labels().useHtml(true);
+chart.node().labels().format(function() {
+//replaces _s with spaces and gets rid of any Nigeria country codes (note applies to both inflow and outflow sides)
+  return "<span style='font-weight:bold; color: white'>" + this.name.replaceAll('_',' ').replaceAll('(NGA)','') + "</span>"
+});
+
+
+chart.flow().normal().labels().fontColor('white');
+
+
+    // configure tooltips of flows
+	chart.flow().tooltip().useHtml(true).format(function() {
+      return "<span>Total displaced flow: </span>" + this.value.toLocaleString();
+    });
+
+	chart.flow().tooltip().titleFormat(function() {
+	return this.getData("custom_field")+"<hr>";
+	});
+
+
+    // configure tooltip titles of nodes
+    chart.node().tooltip().titleFormat(function() {
+      return "<div style='text-align:center'><span style='font-weight:bold'>" + this.name.replaceAll('_',' ') + "</span></br>Total flow: " + this.value.toLocaleString() + "</div><hr>";
+    });
+
+
+
+// enable HTML-mode for node's tooltip and set formatter for it
+      chart
+        .node()
+        .tooltip()
+		//think repetiton of useHtml can be removed
+        .useHtml(true)
+        .format(function () {
+          var tooltip = '';
+          var i;
+          var list;
+          var income;
+          var outcome;
+          var conflict;
+		  
+		  //nodes with inflow
+          if (this.income.length) {
+            income = 0;
+            list = '';
+            for (i = 0; i < this.income.length; i++) {
+              list +=
+                '</br>- ' +
+                this.income[i].name.replaceAll('_',' ') +
+                ': ' +
+                this.income[i].value;// +
+              income += this.income[i].value;
+            }
+            tooltip += 'Displaced arrivals:' + list + '</br>';
+			//slice removes the country code but leaves a single space to differentiate the inflow nodes from the outflow to avoid error
+			//ie. 'name' vs 'name '
+			tooltip += '</br><img src="Locations/Overall/'+this.name.slice(0, -6) +'.png"/>';
+          }
+		  
+		  //nodes with outflow
+          if (this.outcome.length) {
+            outcome = 0;
+            list = '';
+            for (i = 0; i < this.outcome.length; i++) {
+              list +=
+                '</br>- ' +
+				//remove underscores and and Nigeria country codes
+                this.outcome[i].name.replaceAll('_',' ').replaceAll(' (NGA)','') +
+                ': ' +
+                this.outcome[i].value;
+              outcome += this.outcome[i].value;
+            }
+            tooltip += 'Displaced departures:' + list + '</br>';
+			tooltip += '</br><img src="Locations/Overall/'+this.name+'.png"/>';
+          }
+		  
+		  
+          return tooltip;
+        });
+
+
+chart.background().fill("black");
+
+// set the container id
+chart.container("container");
+
+// initiate drawing the chart
+chart.draw();
+</script>
+
+</html>
