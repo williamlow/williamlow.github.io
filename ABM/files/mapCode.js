@@ -227,6 +227,7 @@ info.onAdd = function (map) {
 ////could make single function that checks whether link or loc is calling it
 ////.toLocaleString() gives number formatting
 info.updateLoc = function (props) {
+	console.log('src="locations/Overall/' + props.name + '.png"');
     this._div.innerHTML = (props ?
         '<h5>' + props.full_name + '</h5>' +
 		'<p><span class="all"><b>' + props.end_total.toLocaleString() + '</b> displaced people at the end of the simulation</span>' +
@@ -241,6 +242,7 @@ info.updateLoc = function (props) {
 };
 
 info.updateLink = function (props) {
+		console.log('src="routes/Overall/' + props.name + '.png"');
     this._div.innerHTML = (props ?
         '<h5>' + props.full_name + '</h5>' +
 		'<p><span class="all"><b>' + props.total.toLocaleString() +'</b> agents used this route during the simulation</span>' +
