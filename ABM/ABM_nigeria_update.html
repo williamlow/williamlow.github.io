@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base target="_top">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Nigeria Agent Based Model update</title>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> 
+
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-sankey.min.js"></script>
+<script src="files/sankeyFile.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+<script src="files/links_v3.js"></script>
+<script src="files/locs_v3.js"></script>
+<link rel="stylesheet" type="text/css" href="files/main_styles.css"  />
+
+<style>
+
+
+
+
+
+</style>
+
+</head>
+
+<body>
+
+<div class="article">
+
+<img id="saveLogo" src="images/stc-logo.svg">
+<img class="logo" src="images/rev_uva_logo_color.png">
+<img class="logo" src="images/brunel-logo-blue.png">
+
+<h2>Predictive Displacement project</h2>
+
+<h1>Nigeria ABM simulation progress update</h1>
+
+<h3>1. Introduction</h3>
+
+<h4>1.1 Agent based models</h4>
+
+<p>The most common forms of predictive modelling rely on large amounts of historical data. This is a significant issue in the humanitarian sector in which data is often messy and incomplete, particularly in the countries that are most likely to be of interest.</p>
+
+<p>Agent-based models provide an alternative approach. Instead, we create a simulation with a number of agents, who then act according to rules we have created based on how we understand people’s behaviour. We only need data in order to verify whether our model is performing accurately – though it can also help us establish the rules we need.</p>
+
+<p>In this simple example of an agent-based model, we create three towns along a road, each with 60 people in them. We decide that if a disaster occurs, people are 50% likely to leave the disaster location, and than a shorter route is twice as attractive as a longer one. We then create a simulation in which a disaster occurs in the blue, middle town.</p>
+
+<img class="inline" src="images/abmDemo_bothv2.png">
+
+<p>At the end of the simulation and because of the rules we set, 50% of people have left the blue town, but more have gone to the yellow town because of the shorter travel time. By adding more rules and a more complex network map we can make extremely detailed agent-based models.</p>
+
+
+<h4>1.2 Nigeria</h4>
+
+<p>Our focus in Nigeria is the north-eastern regions of Adamawa, Borno and Yobe – though our initial geographic network is wider to allow flows across the country. Our model applies outbreaks of conflict to the network, in order to predict where displaced people will move to – whether elsewhere in Nigeria or across the border into Cameroon, Chad or Niger. This will allow new insight and data on the needs of displaced populations and their likely locations for support.</p>
+
+<p>The long term vision for this model is integration into an early warning system, to allow systematic prediction of displacement needs.</p>
+
+<img class="inline" src="images/nga_network_map_v2.png">
+<span class="caption">The current model network</span>
+
+<h3>2. Model design</h3>
+
+<h4>2.1 Conflict data</h4>
+
+<p>Past conflict locations are taken from <a href="https://acleddata.com/data-export-tool/">ACLED data</a>. For future simulations, conflicts can be added wherever chosen, allowing specific scenarios to be evaluated. On the completion of a wider early warning system, potential conflict events can be provided to the model to predict outcomes.</p>
+
+<h4>2.2 Locations</h4>
+
+<p>In this first version of the model, locations were selected with the following criteria:</p>
+
+
+ <ol>
+  <li>Five key IDP locations based on IOM data</li>
+  <li>Eight cross border locations in Cameroon, Chad and Niger, based on UNHCR data </li>
+  <li>Additional locations in Nigeria, chosen primarily for their contribution to establishing a travel network across the country. In the future the model can be expanded to include greater numbers of settlements and an even wider travel network.</li>
+</ol> 
+
+<p>Since verification data on numbers of displaced people is available for the IOM and UNHCR locations, we can use our predictions at these locations to measure the model performance.</p>
+
+
+<h4>2.3 Routes</h4>
+
+<p>The routes connecting these locations are based on OpenStreetMap data. When agents in the model decide whether to use a route or not, they consider the cost of its use. Currently that cost is solely based on the distance, and agents prefer shorter routes to their destination. However other factors can be included, such as the difficulty of the terrain or perceived risk of travel through it.</p>
+
+<h4>2.4 Displaced populations</h4>
+
+<p>Once the network of locations and routes is established, we need to add displaced population whose movement we will track. At the start of the simulation, we assign the number of displaced people to all of the locations that we have created in accordance with IOM data. As the simulation proceeds, we create new agents in response to conflicts, adding them to locations to simulate the arrival of newly displaced people from outside the current network.</p>
+
+<p>The number and location of new agents is calculated based the presence of conflict and size of the local population. As with other aspects of the agent-based model, the way in which agents are added is flexible and can easily be adjusted. As our geographical network is extended to include other settlements, we will be able to introduce methodology to predict the displaced outflow from specific locations in more detail, and apply machine learning approaches for greater accuracy.</p>
+
+<h4>2.5 Disaggregation</h4>
+
+<p>It is crucial that we are able to disaggregate predicted populations by age and sex to allow the needs of these populations to be identified and met, but such predictions are challenging as disaggregated data on displaced populations is sparse. Our model draws on disaggregated data for displaced people from IOM locations around Nigeria, and national statistical data sources for regional populations within Nigeria.</p>
+
+<h3>3. Rules and assumptions</h3>
+
+<p>Agent-based approaches give us a lot of freedom in how we build the rules that will determine how people behave. In this model those rules determine how they move across the network in response to conflict. For this simulation we started with rules from previous applications – foremost a recent simulation based on Ethiopia.</p>
+
+<p>These were then provided to the Nigeria country office for an initial check of their accuracy for the new context. Following this, a direct data collection exercise was completed to further verify the ruleset, and to gather new insights for the model. This was targeted at actors based in our regions of interest, with insight into displacement populations. It asked questions related to the size and composition of groups of displaced people, how they choose their destinations, when and why they depart, and how they travel.</p>
+
+<p>There is no limit on the number of rules that can be applied to an agent-based model, and any observation or data that provides insight into how and where displaced people move can be used to improve the model’s performance. We are particularly interested in new insights into how displaced people choose a destination, and how age and sex affects their decisions and movement.</p>
+
+
+
+<h3>4. Performance</h3>
+
+<h4>4.1 Overall performance</h4>
+
+<p>Here we compare our predictions with trues values for the number of displaced people in locations at the end of the 100 day simulation period, based on <a href="https://dtm.iom.int/nigeria">IOM</a> and <a href="https://data.unhcr.org/en/situations/nigeriasituation">UNHCR</a> data. The graph below shows that over the six year period in which we performed simulations, accuracy is consistently high.</p>
+
+<img class="inline" src="images/Performance.png">
+<span class="caption">Model accuracy over a six year evaluation period</span>
+
+<h4>4.2 Location performance</h4>
+
+<p>If we evaluate performance at key locations, we see good performance in nearly all of them. Note that the simulations include both domestic camps within Nigeria and cross-border camps. We see no significant difference in accuracy between locations within Nigeria and across borders, suggesting that both types of displacement are sufficiently captured by the model.</p>
+
+    <table>
+      <tr>
+        <th scope="col">Locations</th>
+        <th scope="col">Country</th>
+        <th scope="col">Simulated</th>
+        <th scope="col">Actual</th>
+        <th scope="col">Accuracy</th>
+      </tr>
+      <tr>
+        <th scope="row">Minawao</th>
+        <td>Cameroon</td>
+        <td>56,863</td>
+        <td>59,579</td>
+        <td>95%</td>
+      </tr>
+      <tr>
+        <th scope="row">Logone et Chari</th>
+        <td>Cameroon</td>
+        <td>26,799</td>
+        <td>33,961</td>
+        <td>79%</td>
+      </tr>
+      <tr>
+        <th scope="row">Mayo Sava</th>
+        <td>Cameroon</td>
+        <td>7,882</td>
+        <td>8,240</td>
+        <td>96%</td>
+      </tr>
+      <tr>
+        <th scope="row">Mayo Tsanaga</th>
+        <td>Cameroon</td>
+        <td>4,325</td>
+        <td>4,456</td>
+        <td>97%</td>
+      </tr>
+	        <tr>
+        <th scope="row">Diffa</th>
+        <td>Niger</td>
+        <td>111,045</td>
+        <td>119,441</td>
+        <td>93%</td>
+      </tr>
+	        <tr>
+        <th scope="row">Dar es Salam</th>
+        <td>Chad</td>
+        <td>13,086</td>
+        <td>10,461</td>
+        <td>75%</td>
+      </tr>
+	        <tr>
+        <th scope="row">Ngouboua</th>
+        <td>Chad</td>
+        <td>1,846</td>
+        <td>247</td>
+        <td>13%</td>
+      </tr>
+	        <tr>
+        <th scope="row">Daware</th>
+        <td>Nigeria</td>
+        <td>2,945</td>
+        <td>2,406</td>
+        <td>78%</td>
+      </tr>
+	        <tr>
+        <th scope="row">Fufore</th>
+        <td>Nigeria</td>
+        <td>1,236</td>
+        <td>1,055</td>
+        <td>83%</td>
+      </tr>
+	        <tr>
+        <th scope="row">ISC</th>
+        <td>Nigeria</td>
+        <td>55,428</td>
+        <td>57,490</td>
+        <td>97%</td>
+      </tr>
+	        <tr>
+        <th scope="row">Kasaisa</th>
+        <td>Nigeria</td>
+        <td>2,823</td>
+        <td>2,509</td>
+        <td>88%</td>
+      </tr>
+	        <tr>
+        <th scope="row">Monguno</th>
+        <td>Nigeria</td>
+        <td>27,893</td>
+        <td>28,784</td>
+        <td>97%</td>
+      </tr>
+    </table>
+	<span class="caption">Prediction accuracy at key network locations</span>
+
+<h4>4.3 Disaggregation performance</h4>
+
+<p>Due to the lack of disaggregation in data on displaced populations, there is limited data available for us to validate our predictions on the age and sex of displaced populations. However some suitable data is available for some IOM locations inside Nigeria. The below table shows a minimal degree of error for both categories in these locations. This suggests the model is disaggregating predicted populations successfully, but requires further investigation – particularly for locations outside Nigeria.</p>
+
+<table>
+      <tr>
+        <th scope="col">Locations</th>
+        <th scope="col">Sex</th>
+        <th scope="col">Age</th>
+
+      </tr>
+      <tr>
+        <th scope="row">Minawao</th>
+        <td>5.6%</td>
+        <td>7.7%</td>
+      </tr>
+      <tr>
+        <th scope="row">Logone et Chari</th>
+        <td>2.5%</td>
+        <td>1%</td>
+      </tr>
+      <tr>
+        <th scope="row">Mayo Sava</th>
+        <td>0.5%</td>
+        <td>2.4%</td>
+      </tr>
+      <tr>
+        <th scope="row">Mayo Tsanaga</th>
+        <td>4.2%</td>
+        <td>6.1%</td>
+      </tr>
+	        <tr>
+        <th scope="row">Diffa</th>
+        <td>0.5%</td>
+        <td>0.9%</td>
+      </tr>
+    </table>
+<span class="caption">Disaggregation error at locations with validation data</span>
+
+<h3>5. Visualisations</h3>
+
+<h4>5.1 Interactive flow chart</h4>
+
+<p>This chart shows the movement between key locations in NE Nigeria and nearby cross border locations during the simulation. It allows examination of the destination and source of displaced populations from each location, and of the flows between them.</p> 
+
+<p>Disaggregated age and sex data is also shown, and graphs provide insight into movement over the 100 day simulation.</p>
+
+<div id="container"></div>
+<span class="caption">Predicted flows between key locations</span>
+
+<h4>5.2 Interactive map</h4>
+<p>This map shows the network used by the model, which extends beyond the NE region of the country that forms our focus. This map allows individual segments of routes to be examined to see which are predicted to be used most over the simulation. Locations also provide data on their populations at the end of the simulation.</p>
+
+<p>Disaggregated age and sex data is also shown, and graphs provide insight into shifting patterns over the 100 day simulation.</p>
+</div>
+<div id="map" style="width: 1200px; height: 800px;">
+<button id="toggleButton" onclick="toggleSimple()">
+        Toggle simple routes
+</button>
+	  </div>
+	  <span class="caption">Prediction data applied to network map</span>
+	  
+<div class="article">
+
+<h3>6. Next steps</h3>
+
+<p>Our next steps for the Nigeria model aim to improve the accuracy of model performance and the geographical detail we are able to provide.</p>
+
+<h4>6.1 Improved travel network</h4>
+
+<p>The current model uses a simple travel network that provides a relatively small number of locations and routes to represent the wider movement of displaced people across the country. By extending this network and adding more locations and routes, we will be able to add complexity to both how we add displaced people to our simulation in response to conflict, and to our predictions of how displaced people will move across Nigeria. The below images shows different potential degrees of network detail based on available road data.</p>
+
+<img class="inline" src="images/road_networks_50_v3.jpg">
+<span class="caption">Detailed road data available for use with model</span>
+
+<p>This will also make scenarios easier to apply, allowing us to add conflicts to specific settlements and areas. We will pay particular attention to travel networks in NE Nigeria to ensure the strength of performance in this focus area.</p>
+
+
+<h4>6.2 Using machine learning to predict displacement sizes</h4>
+
+<p>When a conflict occurs during a simulation, agents are added to adjacent locations based on the size of local populations. We can use learning from other parts of the Predictive Displacement project to apply machine learning approaches to conflict and displacement data in Nigeria to make this process more rigorous and accurate, which will improve model performance.</p>
+
+<p>It should be noted that this element of the model carries particular protection risks and will require additional consideration as a result.</p>
+
+<h4>6.3 Multi-stage planning</h4>
+
+<p>In the current model, displaced people make decisions on where to move towards in a simple way, based on their immediate options rather than a long term ambition to reach a specific location. We have developed functionality to allow this long term planning to take place and are currently incorporating it into the model. This should provide a significant benefit to model performance, allowing more realistic decision making by agents and prevent illogical routes being taken.</p>
+
+<h4>6.4 More complex route tracking</h4>
+
+<p>By storing more data about how agents move through the simulation (and applying the benefit of multi-stage planning to their behaviour), we can provide detailed predictions of how displaced people are moving across the network, showing all stops along their routes throughout the simulation. The example flow chart below shows how this could be visualised.</p>
+
+<img class="inline" src="images/complex_sankey.png">
+<span class="caption">An example of a flow chart with multi-stage route tracking</span>
+
+<h4>6.5 More complex rulesets</h4>
+
+<p>Adding more rules to the model will allow us to more accurately simulate the decision making factors that drive movement across the country. We are particularly keen to gather insights into the factors that pull people towards certain locations over others, how religious and ethnic identities shape decision making, and how age and sex of displaced people affect both intent and movement itself.</p>
+
+<h3>7. Contact</h3>
+
+<p><b>William Low</b> - <a href="mailto:william.low@savethechildren.org">william.low@savethechildren.org</a> – Project Manager</p>
+<p><b>Auke Tas</b> - <a href="mailto:auke.tas@savethechildren.org">auke.tas@savethechildren.org</a> – Data Scientist</p>
+
+<p class="endPara">Key technical expertise provided by University of Brunel: <b>Derek Groen</b>, <b>Alireza Jahani</b>, <b>Diana Suleimenova</b>.</p>
+
+
+</div>
+
+</body>
+	<script src="files/sankeyCode.js"></script>
+	<script src="files/mapCode.js"></script>
+
+<script>
+
+
+
+
+
+</script>
+
+</html>
