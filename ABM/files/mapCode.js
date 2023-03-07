@@ -227,7 +227,6 @@ info.onAdd = function (map) {
 ////could make single function that checks whether link or loc is calling it
 ////.toLocaleString() gives number formatting
 info.updateLoc = function (props) {
-	console.log('src="locations/Overall/' + props.name + '.png"');
     this._div.innerHTML = (props ?
         '<h5>' + props.full_name + '</h5>' +
 		'<p><span class="all"><b>' + props.end_total.toLocaleString() + '</b> displaced people at the end of the simulation</span>' +
@@ -235,14 +234,13 @@ info.updateLoc = function (props) {
 		'<span class="u5"><b>' + props.end_under5.toLocaleString() + '</b> under 5</span>' +
 		'</br><span class="female"><b>' + props.end_female.toLocaleString() + '</b> female</span>  |  ' +
 		'<span class="male"><b>' + props.end_male.toLocaleString() + '</b> male</span></p>' +
-				'<div class="imagecaption"><figure><img class="infoGraph" src="locations/Overall/' + props.name + '.png"><figcaption>Displaced people at location per day</figcaption></figure></div>' +
-				'<div class="imagecaption"><figure><img class="infoGraph" src="locations/Age/' + props.name + '.png"><figcaption>% share by age</figcaption></figure></div>' +
-				'<div class="imagecaption"><figure><img class="infoGraph" src="locations/Gender/' + props.name + '.png"><figcaption>% share by sex</figcaption></figure></div>' 
+				'<div class="imagecaption"><figure><img class="infoGraph" src="Locations/Overall/' + props.name + '.png"><figcaption>Displaced people at location per day</figcaption></figure></div>' +
+				'<div class="imagecaption"><figure><img class="infoGraph" src="Locations/Age/' + props.name + '.png"><figcaption>% share by age</figcaption></figure></div>' +
+				'<div class="imagecaption"><figure><img class="infoGraph" src="Locations/Gender/' + props.name + '.png"><figcaption>% share by sex</figcaption></figure></div>' 
         : '<span id="readoutDefault">Hover over a location or route</span>');
 };
 
 info.updateLink = function (props) {
-		console.log('src="routes/Overall/' + props.name + '.png"');
     this._div.innerHTML = (props ?
         '<h5>' + props.full_name + '</h5>' +
 		'<p><span class="all"><b>' + props.total.toLocaleString() +'</b> agents used this route during the simulation</span>' +
@@ -250,9 +248,9 @@ info.updateLink = function (props) {
 		'<span class="u5"><b>' + props.under5.toLocaleString() + '</b> under 5</span>' +
 		'</br><span class="female"><b>' + props.female.toLocaleString() + '</b> female</span>  |  ' +
 		'<span class="male"><b>' + props.male.toLocaleString() + '</b> male</span></p>' +
-				'<div class="imagecaption"><figure><img class="infoGraph" src="routes/Overall/' + props.name + '.png"><figcaption>Displaced people on route per day</figcaption></figure></div>' +
-				'<div class="imagecaption"><figure><img class="infoGraph" src="routes/Age/' + props.name + '.png"><figcaption>% share by age</figcaption></figure></div>' +
-				'<div class="imagecaption"><figure><img class="infoGraph" src="routes/Gender/' + props.name + '.png"><figcaption>% share by sex</figcaption></figure></div>' 
+				'<div class="imagecaption"><figure><img class="infoGraph" src="Routes/Overall/' + props.name + '.png"><figcaption>Displaced people on route per day</figcaption></figure></div>' +
+				'<div class="imagecaption"><figure><img class="infoGraph" src="Routes/Age/' + props.name + '.png"><figcaption>% share by age</figcaption></figure></div>' +
+				'<div class="imagecaption"><figure><img class="infoGraph" src="Routes/Gender/' + props.name + '.png"><figcaption>% share by sex</figcaption></figure></div>' 
         : '<span id="readoutDefault">Hover over a location or route</span>');
 };
 
