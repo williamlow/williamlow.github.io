@@ -38,6 +38,7 @@ width: 300px;
 .inline {
 display: block;
 margin: 0 auto;
+max-width: 90%;
 }
 
 .caption {
