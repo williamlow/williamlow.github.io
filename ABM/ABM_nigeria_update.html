@@ -111,11 +111,34 @@
 
 <p>There is no limit on the number of rules that can be applied to an agent-based model, and any observation or data that provides insight into how and where displaced people move can be used to improve the model’s performance. We are particularly interested in new insights into how displaced people choose a destination, and how age and sex affects their decisions and movement.</p>
 
+<h3>4. Visualisations</h3>
 
+<h4>4.1 Interactive flow chart</h4>
 
-<h3>4. Performance</h3>
+<p>This chart shows the movement between key locations in NE Nigeria and nearby cross border locations during the simulation, covering a 100 day period from the 14th June, 2019. It allows examination of the destination and source of displaced populations from each location, and of the flows between them.</p> 
 
-<h4>4.1 Overall performance</h4>
+<p>Disaggregated age and sex data is also shown, and graphs provide insight into movement over the 100 day simulation.</p>
+
+<div id="container"></div>
+<span class="caption">Predicted flows between key locations</span>
+
+<h4>4.2 Interactive map</h4>
+<p>This map shows the network used by the model, which extends beyond the NE region of the country that forms our focus. This map allows individual segments of routes to be examined to see which are predicted to be used most over the simulation. Locations also provide data on their populations at the end of the simulation.</p>
+
+<p>Disaggregated age and sex data is also shown, and graphs provide insight into shifting patterns over the 100 day simulation.</p>
+</div>
+<div id="map" style="width: 1200px; height: 800px;">
+<button id="toggleButton" onclick="toggleSimple()">
+        Toggle simple routes
+</button>
+	  </div>
+	  <span class="caption">Prediction data applied to network map</span>
+	  
+<div class="article">
+
+<h3>5. Performance</h3>
+
+<h4>5.1 Overall performance</h4>
 
 <p>Here we compare our predictions with trues values for the number of displaced people in locations at the end of the 100 day simulation period, based on <a href="https://dtm.iom.int/nigeria">IOM</a> and <a href="https://data.unhcr.org/en/situations/nigeriasituation">UNHCR</a> data. The graph below shows that over the six year period in which we performed simulations, accuracy is consistently high.</p>
 
@@ -124,7 +147,7 @@
 <img class="inline" src="images/Performance.png">
 <span class="caption">Model accuracy over a six year evaluation period</span>
 
-<h4>4.2 Location performance</h4>
+<h4>5.2 Location performance</h4>
 
 <p>If we evaluate performance at key locations, we see good performance in nearly all of them. Note that the simulations include both domestic camps within Nigeria and cross-border camps. We see no significant difference in accuracy between locations within Nigeria and across borders, suggesting that at the current level of complexity, both types of displacement are sufficiently captured by the model.</p>
 
@@ -223,7 +246,7 @@
     </table>
 	<span class="caption">Prediction accuracy at key network locations</span>
 
-<h4>4.3 Disaggregation performance</h4>
+<h4>5.3 Disaggregation performance</h4>
 
 <p>Due to the lack of disaggregation in data on displaced populations, there is limited data available for us to validate our predictions for age and sex. However some suitable data is available for some IOM locations inside Nigeria. The below table shows a minimal degree of error for both categories in these locations. This suggests the model is disaggregating predicted populations successfully, but requires further investigation – particularly for locations outside Nigeria.</p>
 
@@ -261,31 +284,6 @@
       </tr>
     </table>
 <span class="caption">Disaggregation error at locations with validation data</span>
-
-<h3>5. Visualisations</h3>
-
-<h4>5.1 Interactive flow chart</h4>
-
-<p>This chart shows the movement between key locations in NE Nigeria and nearby cross border locations during the simulation. It allows examination of the destination and source of displaced populations from each location, and of the flows between them.</p> 
-
-<p>Disaggregated age and sex data is also shown, and graphs provide insight into movement over the 100 day simulation.</p>
-
-<div id="container"></div>
-<span class="caption">Predicted flows between key locations</span>
-
-<h4>5.2 Interactive map</h4>
-<p>This map shows the network used by the model, which extends beyond the NE region of the country that forms our focus. This map allows individual segments of routes to be examined to see which are predicted to be used most over the simulation. Locations also provide data on their populations at the end of the simulation.</p>
-
-<p>Disaggregated age and sex data is also shown, and graphs provide insight into shifting patterns over the 100 day simulation.</p>
-</div>
-<div id="map" style="width: 1200px; height: 800px;">
-<button id="toggleButton" onclick="toggleSimple()">
-        Toggle simple routes
-</button>
-	  </div>
-	  <span class="caption">Prediction data applied to network map</span>
-	  
-<div class="article">
 
 <h3>6. Next steps</h3>
 
