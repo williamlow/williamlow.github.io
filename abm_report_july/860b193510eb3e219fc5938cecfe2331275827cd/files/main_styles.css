@@ -1,0 +1,276 @@
+/* General styles */
+
+html, body {
+			margin: 0;
+			background-color: white;
+			color: black;
+			font-family: 'Open Sans', sans-serif;
+		}
+
+.article {
+max-width: 1000px;
+margin: auto;
+}
+	
+.endPara {
+margin-bottom: 100px;
+}
+
+h3 {
+margin-top: 40px;
+}
+
+img {
+max-width: 800px;
+}
+
+.logo {
+width: 200px;
+float: right;
+}
+
+#saveLogo {
+width: 300px;
+}
+
+.inline {
+display: block;
+margin: 0 auto;
+max-width: 90%;
+}
+
+.caption {
+display: table;
+margin: 0 auto;
+font-size: 15px;
+margin-bottom: 30px;
+}
+	
+
+/* Disagg colours */
+
+.all {
+color: #5B9FCD;
+}
+
+.u18 {
+color: #f78ca0;
+}
+
+.u5 {
+color: #e34a33;
+}
+
+.male {
+color: #1E8F89;
+}
+
+.female {
+color: #F4BA3B;
+}
+
+
+
+/* Leaflet map */
+	
+	
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.readout {
+	min-height: 250px;
+	min-width: 550px;
+	text-align: center;
+	background-color: rgba(33, 33, 33, 0.8);
+	color: white;
+}
+
+.readout h5 {
+    color: white;
+	font-size: 25px;
+	margin: 15px;
+}
+
+#readoutDefault {
+display: inline-block;
+margin-top: 85px;
+font-size: 20px;
+color: white;
+}
+
+
+.legend h4 {
+    margin: 0 0 5px;
+    color: black;
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+#toggleButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 5px;
+  z-index: 500;
+}
+
+.leaflet-tooltip{
+background-color: transparent;
+border: 0px;
+box-shadow: none;
+}
+
+.leaflet-tooltip-bottom::before {
+  border-bottom-color: transparent;
+}
+
+.locLabel{
+    color: white;
+   text-shadow:
+    -1px -1px 0 #000,
+     0   -1px 0 #000,
+     1px -1px 0 #000,
+     1px  0   0 #000,
+     1px  1px 0 #000,
+     0    1px 0 #000,
+    -1px  1px 0 #000,
+    -1px  0   0 #000;
+}
+
+.infoGraph {
+	margin: 0px 3px;
+}
+
+.imagecaption {
+    padding: 3px;
+    float: left;
+	font-size: 11px;
+}
+figure {
+    display: table;
+    margin: 0px;
+
+}
+
+figure img {
+    display: block;
+}
+
+figcaption {
+    display: table-caption;
+    caption-side: bottom;
+    text-align: center;
+	margin-top: 2px;
+	color: white;
+}
+
+
+
+
+
+/* Sankey */
+
+#container {
+height: 70vh;
+width: 70vw;
+min-height: 500px;
+min-width: 500px;
+max-width: 900px;
+max-height: 900px;
+margin: auto;
+}
+
+
+.grid-container {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: auto auto;
+  padding: 5px;
+  }
+
+.grid-item {
+  padding: 0px;
+}
+
+.gridGraph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagecaption {
+    padding: 3px;
+    margin: 10px;
+    float: left;
+    border: 1px solid black;
+	font-size: 11px;
+}
+figure {
+    display: table;
+    margin: 0px;
+
+}
+
+figure img {
+    display: block;
+}
+
+figcaption {
+    display: table-caption;
+    caption-side: bottom;
+    text-align: center;
+    border: 1px dotted blue;
+}
+
+
+/* Tables */
+/* 
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(200,200,200);
+  letter-spacing: 1px;
+  margin: 10px auto;
+  font-size: 14px;
+}
+
+td, th {
+  border: 1px solid rgb(190,190,190);
+  padding: 10px 20px;
+}
+
+th {
+  background-color: rgb(235,235,235);
+}
+
+td {
+  text-align: center;
+}
+
+tr:nth-child(even) td {
+  background-color: rgb(250,250,250);
+}
+
+tr:nth-child(odd) td {
+  background-color: rgb(245,245,245);
+} */
+
+caption {
+  padding: 10px;
+}
