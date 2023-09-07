@@ -153,6 +153,7 @@ var smoothFactor = 0
 																					"color": "#3182bd",　
 																					"pulseColor": "#9ecae1",
 																					smoothFactor: smoothFactor,
+																					renderer: L.svg({ pane: "overlayPane" })
 																				});											
 								//manually adding feature data (eg.properties for use in tooltips)
 								polylineAntPrimary.feature = feature;
@@ -180,7 +181,7 @@ var smoothFactor = 0
 																					"color": "#d95f0e",　
 																					"pulseColor": "#fec44f",
 																					smoothFactor: smoothFactor,
-																					pane: 'antPane'　
+																					renderer: L.svg({ pane: "overlayPane" })
 																				});
 								
 								polylineAntSecondary.feature = feature;
