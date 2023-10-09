@@ -365,13 +365,18 @@ info.onAdd = function (map) {
 //.toLocaleString() gives number formatting
 info.updateLoc = function (props) {
     this._div.innerHTML = (props ?
-        '<h5>' + props.name + '</h5>' +
+		// if less than 10 people at end of simulation, just show total
+        props.end_total<10 ? 
+		'<h5>' + props.name + '</h5>' +
+		'<p><span class="all"><b>' + props.end_total.toLocaleString() + '</b> displaced people at the end of the simulation</span>'
+		//else provide full breakdown
+		: '<h5>' + props.name + '</h5>' +
 		'<p><span class="all"><b>' + props.end_total.toLocaleString() + '</b> displaced people at the end of the simulation</span>' +
 		'</br><span class="u18"><b>' + props.end_under18.toLocaleString() + '</b> under 18</span>  |  ' +
 		'<span class="u5"><b>' + props.end_under5.toLocaleString() + '</b> under 5</span>' +
 		'</br><span class="female"><b>' + props.end_female.toLocaleString() + '</b> female</span>  |  ' +
 		'<span class="male"><b>' + props.end_male.toLocaleString() + '</b> male</span></p>' +
-				'<div class="imagecaption"><figure><img class="infoGraph" src="plots/map/locations/overall/' + props.name + '.png"><figcaption>Displaced people at location per day</figcaption></figure></div>' +
+				'<div class="imagecaption"><figure><img class="infoGraph" src="plots/map/locations/overall/' + props.name + '.png"><figcaption>Displaced at location per day</figcaption></figure></div>' +
 				'<div class="imagecaption"><figure><img class="infoGraph" src="plots/map/locations/age/' + props.name + '.png"><figcaption>% share by age</figcaption></figure></div>' +
 				'<div class="imagecaption"><figure><img class="infoGraph" src="plots/map/locations/gender/' + props.name + '.png"><figcaption>% share by sex</figcaption></figure></div>' 
         : '<span id="readoutDefault">Hover over a location or route</span>');
@@ -385,7 +390,7 @@ info.updatePrimLink = function (props) {
 		'<span class="u5"><b>' + props.pri_under5.toLocaleString() + '</b> under 5</span>' +
 		'</br><span class="female"><b>' + props.pri_female.toLocaleString() + '</b> female</span>  |  ' +
 		'<span class="male"><b>' + props.pri_male.toLocaleString() + '</b> male</span></p>' +
-				'<div class="imagecaption"><figure><img class="infoGraph" src="plots/map/routes/overall/' + props.pri_name + '.png"><figcaption>Displaced people on route per day</figcaption></figure></div>' +
+				'<div class="imagecaption"><figure><img class="infoGraph" src="plots/map/routes/overall/' + props.pri_name + '.png"><figcaption>Displaced on route per day</figcaption></figure></div>' +
 				'<div class="imagecaption"><figure><img class="infoGraph" src="plots/map/routes/age/' + props.pri_name + '.png"><figcaption>% share by age</figcaption></figure></div>' +
 				'<div class="imagecaption"><figure><img class="infoGraph" src="plots/map/routes/gender/' + props.pri_name + '.png"><figcaption>% share by sex</figcaption></figure></div>' 
         : '<span id="readoutDefault">Hover over a location or route</span>');
@@ -399,7 +404,7 @@ info.updateSecLink = function (props) {
 		'<span class="u5"><b>' + props.sec_under5.toLocaleString() + '</b> under 5</span>' +
 		'</br><span class="female"><b>' + props.sec_female.toLocaleString() + '</b> female</span>  |  ' +
 		'<span class="male"><b>' + props.sec_male.toLocaleString() + '</b> male</span></p>' +
-				'<div class="imagecaption"><figure><img class="infoGraph" src="plots/map/routes/overall/' + props.sec_name + '.png"><figcaption>Displaced people on route per day</figcaption></figure></div>' +
+				'<div class="imagecaption"><figure><img class="infoGraph" src="plots/map/routes/overall/' + props.sec_name + '.png"><figcaption>Displaced on route per day</figcaption></figure></div>' +
 				'<div class="imagecaption"><figure><img class="infoGraph" src="plots/map/routes/age/' + props.sec_name + '.png"><figcaption>% share by age</figcaption></figure></div>' +
 				'<div class="imagecaption"><figure><img class="infoGraph" src="plots/map/routes/gender/' + props.sec_name + '.png"><figcaption>% share by sex</figcaption></figure></div>' 
         : '<span id="readoutDefault">Hover over a location or route</span>');
@@ -428,15 +433,55 @@ legend_locs.onAdd = function (map) {
             grades[i].toLocaleString() + (grades[i + 1] ? '&ndash;' + grades[i + 1].toLocaleString() + '<br>' : '+');
     }
 
+	div.innerHTML += '<h4 id="confLegendTitle">Conflict intensity</h4><i class="confMarker"></i>'
+
+
     return div;
 };
 
 legend_locs.addTo(map);
 
 
+
+// or, add to an existing map:
+map.addControl(new L.Control.Fullscreen());
+
+
+//adding conflicts as heatmap
+
+//originally just added as points
+//L.geoJSON(confData).addTo(map);
+
+//function to convert json input to a simple array we can use with heatmap plugin
+function geoJson2heat(geojson, weight) {
+    return geojson.features.map(function(feature) {
+        return [
+		//flips lat lng position
+            feature.geometry.coordinates[1],
+            feature.geometry.coordinates[0],
+            feature.properties[weight]
+        ];
+    });
+}
+
+//passes fatalities as heat weight
+var heatInput = geoJson2heat(confData, 'fatalities');
+
+//create heatlayer and add to map
+var heatOutput = L.heatLayer(heatInput, {
+    //prevents small and zero values disappearing
+	minOpacity: 0.5,
+    radius: 30,
+	//red gradient
+	gradient : {0.25: '#5A2C2D', 0.5: '#802628', 0.75: '#A51F22', 1: '#CB181D'}
+}
+)//.addTo(map);
+
+
+
 //centre map on largest settlement value
 //slight adjustment for text box
-//map.flyTo([parseFloat(maxLocLat)-0.4, maxLocLon], 9)
+map.flyTo([parseFloat(maxLocLat)-0.4, maxLocLon], 9)
 
 //manual repositioning for July 2023 report. Remove and activate above code.
-map.flyTo([10.997816151968104, 12.145385742187502], 9)
+//map.flyTo([10.997816151968104, 12.145385742187502], 9)
