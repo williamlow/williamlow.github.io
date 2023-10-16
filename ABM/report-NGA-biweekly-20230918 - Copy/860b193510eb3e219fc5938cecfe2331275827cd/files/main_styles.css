@@ -1,0 +1,398 @@
+/* General styles */
+
+:root {
+    --main-color: #DA291C;
+}
+
+html, body {
+			margin: 0;
+			background-color: white;
+			color: black;
+			font-family: Lato, sans-serif;
+			background-color: #4A4F53;
+padding: 0px;
+		}
+
+.article {
+max-width: 800px;
+margin: auto;
+background-color: #F3F2EE;
+padding: 5px 30px;
+}
+
+.header {
+background-color: var(--main-color);
+padding: 0 30px 5px;
+color: #F3F2EE;
+}
+
+h1 {
+	  font-family: Oswald, Lato, sans-serif;
+	  text-transform: uppercase;
+	  font-size: 38px;
+	  margin: 22px 0;
+}
+
+
+h3 {
+margin-top: 20px;
+}
+
+
+.logo {
+width: 200px;
+float: none;
+}
+
+#saveLogo {
+width: 300px;
+}
+
+#italyCredit {
+width: 95%;
+display: inline-block;
+font-weight: bold;
+font-size: 15px;
+  margin-left: 10px;
+}
+
+.inline {
+display: block;
+margin: 0 auto;
+max-width: 90%;
+}
+
+.caption {
+display: table;
+margin: 0 auto;
+font-size: 15px;
+margin-bottom: 30px;
+}
+
+figure {
+	display: table;
+  margin: 0px;
+}
+
+.figure {
+margin: 0px auto 10px auto;
+}
+
+.figureText {
+max-width: 630px;
+margin: auto;
+text-align: center;
+margin-bottom: 10px;
+}
+
+.figureText.belowText {
+margin-bottom: 40px;
+}
+
+.textField {
+font-weight: bold;
+}
+
+.figureTitle {
+text-align:center;
+margin-bottom: 5px;
+}
+
+#lineContainer {
+      width: 600px;
+      height: 400px;
+      padding: 0;
+    }
+
+#disaggContainer {
+      width: 600px;
+      height: 400px;
+      padding: 0;
+    }
+	
+#sankeyContainer {
+      width: 800px;
+      height: 600px;
+      padding: 0;
+    }
+
+/* unvisited link */
+a:link {
+  color: var(--main-color);
+}
+
+/* visited link */
+a:visited {
+  color: var(--main-color);
+}
+
+/* mouse over link */
+a:hover {
+  color: darkred;
+}
+
+.rowA {
+background: #D1CCBD;
+}
+
+.rowB {
+	
+}
+
+/* Hover text tooltip */
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  margin-left: 5px;
+  font-size: small;
+  color: var(--main-color);
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 220px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  top: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 25%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+/* Disagg colours */
+
+.all {
+color: #5B9FCD;
+}
+
+.u18 {
+color: #f78ca0;
+}
+
+.u5 {
+color: #e34a33;
+}
+
+.male {
+color: #1E8F89;
+}
+
+.female {
+color: #F4BA3B;
+}
+
+/* Conflict table */
+
+#showConflictList {
+margin-left: 8px;
+margin-left: 8px;
+  background: var(--main-color);
+  font-size: smaller;
+  border: none;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 4px 10px;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+}
+
+#conflictList_wrapper {
+font-size: 14px;
+}
+
+        td.details-control {
+            text-align:center;
+            color:forestgreen;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    text-align:center; 
+    color:red;
+}
+
+#conflictListBlock {
+	margin-bottom: 30px;
+}
+
+/* Total disp figure */
+
+#totalDisp {
+text-align: center;
+  font-size: 50px;
+  font-weight: bold;
+  color: var(--main-color);
+}
+
+/* Leaflet map */
+	
+	#map {
+    width: 800px;
+	height: 600px;
+	margin-top: 10px;
+	margin-bottom: 40px;
+}	
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.readout {
+	min-height: 230px;
+	min-width: 500px;
+	text-align: center;
+	background-color: rgba(33, 33, 33, 0.8);
+	color: white;
+}
+
+.readout h5 {
+    color: white;
+	font-size: 25px;
+	margin: 8px;
+}
+
+.readout p {
+	margin: 5px;
+}
+
+#readoutDefault {
+display: inline-block;
+margin-top: 85px;
+font-size: 20px;
+color: white;
+}
+
+
+.legend h4 {
+    margin: 0 0 5px;
+    color: black;
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+#toggleButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 5px;
+  z-index: 500;
+}
+
+.leaflet-tooltip{
+background-color: transparent;
+border: 0px;
+box-shadow: none;
+}
+
+.leaflet-tooltip-bottom::before {
+  border-bottom-color: transparent;
+}
+
+.locLabel{
+    color: white;
+   text-shadow:
+    -1px -1px 0 #000,
+     0   -1px 0 #000,
+     1px -1px 0 #000,
+     1px  0   0 #000,
+     1px  1px 0 #000,
+     0    1px 0 #000,
+    -1px  1px 0 #000,
+    -1px  0   0 #000;
+}
+
+.infoGraph {
+	margin: 0px 3px;
+	height: 120px;
+}
+
+.imagecaption {
+    padding: 3px;
+    float: left;
+	font-size: 11px;
+}
+
+#confLegendTitle {
+margin: 5px 0 2px;
+}
+
+.legend .confMarker {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background: radial-gradient(circle at center, #CB181D 25%, #d6d6d6 75%);
+}
+
+#map a {
+  color: black;
+}
+
+/* Sankey */
+
+.anychart-credits {
+display: none;
+}
+
+#container {
+height: 70vh;
+width: 70vw;
+min-height: 500px;
+min-width: 500px;
+max-width: 900px;
+max-height: 900px;
+margin: auto;
+}
+
+
+.grid-container {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: auto auto;
+  padding: 5px;
+  }
+
+.grid-item {
+  padding: 0px;
+}
+
+.gridGraph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
