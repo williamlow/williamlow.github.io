@@ -26,7 +26,9 @@
 			 //replace 'search' with 'filter'
 			 "language": {
     "search": "Filter:"
-  }
+  },
+  			 "columnDefs": [
+       {"className": "dt-center", "targets": [ 0, 2, 3 ]}]
          });
 
          // Add event listener for opening and closing details
