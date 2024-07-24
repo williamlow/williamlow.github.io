@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base target="_top">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Nigeria ABM report</title>
+
+<! font >
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Oswald:wght@500&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans&family=Oswald:wght@500&display=swap" rel="stylesheet"> 
+
+<! jquery >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<! datatables >
+    
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.css" />
+  
+	<! date plugin >
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+	<script src="https://cdn.datatables.net/plug-ins/1.13.6/sorting/datetime-moment.js"></script>
+	
+	<! font awesome >	
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<! anychart >
+	<script src="https://cdn.anychart.com/releases/8.11.1/js/anychart-base.min.js"></script>
+	<script src="https://cdn.anychart.com/releases/8.11.1/js/anychart-sankey.min.js"></script>
+
+<! leaflet >
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+	<script src="files/leaflet.polylineoffset.js"></script>
+	<script src="files/leaflet-ant-path.js"></script>
+	<script src="files/Leaflet.fullscreen.js"></script>
+	<link rel="stylesheet" type="text/css" href="files/leaflet.fullscreen.css"  />
+	<script src="files/leaflet-heat.js"></script>
+
+
+<! data >
+	<script src="data/data_report.js" type="text/javascript"></script>
+	<script src="data/data_conflict.js" type="text/javascript"></script>	
+	<script src="data/data_line.js" type="text/javascript"></script>
+	<script src="data/data_disagg.js" type="text/javascript"></script>
+	<script src="data/data_sankey.js" type="text/javascript"></script>
+	<script src="data/data_links.js"></script>
+	<script src="data/data_locs.js"></script>
+	
+<! stylesheet (load last)>
+	<link rel="stylesheet" type="text/css" href="files/main_styles.css"  />
+
+
+</head>
+
+<body>
+
+<div class="article header">
+<img id="saveLogo" src="images/stc_logo_h_white.png">
+<span id="italyCredit">With support from Save the Children Italy</span>
+
+	
+<h1>Predictive Displacement <span id="reportFreq"></span>report</h1>
+
+</div>
+<div class="rowA article">
+
+<p><span class="textField">Geography: </span><span id="geog"></span></p>
+
+<p><span class="textField">Conflict period: </span><span id="confPeriod"></span></p>
+
+<p><span class="textField">Report period: </span><span id="repPeriod"></span><span class="tooltip">Why?<span class="tooltiptext">Our simulations cover a 90 day period, including a month of conflict data and additional time to cover the medium term impact on displacement</span></span></p>
+
+<p><span class="textField">Conflict events in period: </span><span id="totalConf"></span><button id="showConflictList">Show conflict details</button></p>
+
+</div>
+
+<div class="rowB article">   
+<div id="conflictListBlock" style="display:none;">
+<h4 class="figureTitle">Conflict events included in model:</h4>
+  
+      <table width="100%" class="display compact " id="conflictList" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Fatalities</th>
+				<th>Detail</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+</div>
+
+<div class="rowB article">
+<h4 class="figureTitle">Total displacement predicted:</h4>
+<div id="totalDisp"></div>
+<p class="figureText belowText">This figure represents the total number of individuals predicted to be displaced during the 90 day simulation.</p>
+</div>
+
+<div class="rowB article">
+<h4 class="figureTitle">Cumulative displacement during simulation</h4>
+<p class="figureText">This chart shows the cumulative number of people displaced over time.</p>
+<div id="lineContainer"class="figure"></div>
+</div>
+
+<div class="rowB article">
+<h4 class="figureTitle">Demographic breakdown</h4>
+<p class="figureText">This chart shows the predicted demographic disaggregation of the total predicted displaced population, by age and sex.</p>
+<div id="disaggContainer"class="figure"></div>
+</div>
+
+<div class="rowB article">
+<h4 class="figureTitle">Most significant flows</h4>
+<p class="figureText">This chart describes the flow of displaced people between key locations. Hover over locations or flows to see additional detail on flow over time, and breakdown by age and sex.</p><br> <p class="figureText">Note that locations listed below may not be the final destination for displaced populations. For predictions of the total displaced populations in locations at the end of the 90 day simulation, see the following visualisation.</p>
+<div id="sankeyContainer" class="figure"></div>
+</div>
+
+<div class="rowB article">
+<h4 class="figureTitle">Flows by route</h4>
+<p class="figureText">This map shows which land routes between key settlements will see use by displaced populations on the move, and the final predicted totals for each location. Routes have been simplified to direct connections. Fullscreen viewing advised.</p>
+<p class="figureText"></p>
+<div id="map" class="figure">
+	  </div>
+</div>	  
+
+<div class="article rowA">
+<h3>Data and performance</h3>
+
+<p>Conflict events are sourced from <a href="https://ngosafety.org/">INSO data</a>. SC Nigeria Early Warning System data will be used when available.</p>
+
+<p>Model performance is measured by running large scale simulations of past conflicts and verifying predictions against IOM DTM data. The current model has an average error rate of 16%.</p>
+
+<h3>Notes on use</h3>
+
+<p>These results should be used to assess likely future trends in displacement patterns. Figures should not be treated as exact outcomes, and should always be used in combination with other situation assessment and decision-making processes.</p>
+
+
+<h3 id="last_h3">Contact</h3>
+
+<p>William Low, Predictive Displacement Project Manager<br><a href="mailto:william.low@savethechildren.org">william.low@savethechildren.org</a></p>
+
+<img class="logo" src="images/brunel_logo.webp">
+<img class="logo" src="images/uva_logo.webp">
+
+</div>
+
+</body>
+
+<script src="files/code_sankey.js"></script>
+<script src="files/code_map.js"></script>
+<script src="files/code_line.js"></script>
+<script src="files/code_disagg.js"></script>
+<script src="files/code_table.js" type="text/javascript"></script>
+
+<script>
+
+//fill blank fields in report
+//drawn from data_report
+$("#reportFreq").html(reportFreq+" "); 
+$("#geog").html(geography); 
+$("#confPeriod").html(conflict_period); 
+$("#repPeriod").html(report_period);
+//drawn from conflict table data
+$("#totalConf").html(confData.features.length); 
+//takes value from final record of line graph data
+$("#totalDisp").html(lineData.slice(-1)[0][3]); 
+	  
+</script>
+
+</html>
