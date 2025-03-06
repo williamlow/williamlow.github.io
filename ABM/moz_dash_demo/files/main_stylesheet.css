@@ -1,0 +1,288 @@
+html, body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            font-family: 'Lato', sans-serif;
+
+		}
+
+        #header {
+            width: 100%;
+            height: 5%;
+            background-color: darkred;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 2vh;
+        }
+
+        #headerMenu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #headerTitle {
+            margin-left: 20px;
+            font-weight: bold;
+            font-size: 3vh;
+        }
+
+        .headerButton {
+            margin-left: 30px;
+        }
+
+        #headerMode {
+            background-color: #084594;
+            padding: 5px 10px;
+            border: 1px white solid;
+        }
+
+        #page {
+            height: 95%;
+            background-color: lightgray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #dashboardContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90%;
+            width: 100%;
+        }
+
+        #dataPane {
+            flex: 0 0 40%;
+            box-sizing: border-box;
+            max-width: 800px;
+            height: 100%;
+            max-height: 1000px;
+            margin-left: 10px;
+          }
+
+          .dataPaneSection {
+            margin: 0 5px;
+        }
+        
+        .dataPaneBox {
+            padding: 5px;
+            border-radius: 10px;
+            background-color: white;
+        }
+
+        #mapPane {
+            flex: 0 0 40%;
+            box-sizing: border-box;
+            max-width: 800px;
+            height: 100%;
+            max-height: 1000px;
+        }
+
+        .mapPaneBox {
+            padding: 0.2vh 0.5vw;
+            border-radius: 10px;
+            background-color: white;
+            box-sizing: border-box;
+        }
+
+        #map {
+            flex: 0 0 45%;
+            background: white;
+            border-radius: 10px;
+            box-sizing: border-box;
+            max-width: 800px;
+            height: 80%;
+            max-height: 1000px;
+            box-sizing: border-box;
+        }
+
+        #disaggContainer {
+            height: 100%;
+        }
+
+
+        .leaflet-tooltip {
+    background-color: transparent;
+    border: 0px;
+    box-shadow: none;
+    color: #000;
+    font-size: 12px;
+  text-shadow:
+    1px 1px 0px #fff,
+    -1px 1px 0px #fff,
+    -1px -1px 0px #fff,
+    1px -1px 0px #fff,
+    1px 2px 0px #fff,
+    -1px 2px 0px #fff,
+    -1px -2px 0px #fff,
+    1px -2px 0px #fff,
+    2px 1px 0px #fff,
+    -2px 1px 0px #fff,
+    -2px -1px 0px #fff,
+    2px -1px 0px #fff,
+    2px 2px 0px #fff,
+    -2px 2px 0px #fff,
+    -2px -2px 0px #fff,
+    2px -2px 0px #fff;
+
+}
+
+
+
+.arrListEntry {
+    display: inline-block;
+    color: #444;
+    border: 1px solid #CCC;
+    background: #DDD;
+    vertical-align: middle;
+    padding: 0 5px;
+    text-align: center;
+    margin: 0 5px 3px 0;
+    border-radius: 5px;
+    font-size: smaller;
+
+}
+
+#arrivalsField {
+    background-color: lightgray;
+    padding: 4px;
+    border-radius: 5px;
+    border: 1px gray solid;
+
+}
+
+#resetBtn {
+    border:2px solid #acacac;
+    background:#DDD;
+    cursor:pointer;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#resetBtn:hover {
+  border: 2px solid rgb(75, 75, 75);
+}
+
+#sankeyContainer {
+    position: relative;
+    Height: 400px;
+}
+
+#noFlows {
+background-color: white;
+position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+}
+
+.anychart-credits {display: none;}
+
+.invisible { display: none; }
+
+
+#mainTitle {
+    font-size: 2vh;
+    color: darkred;
+    font-weight: bold;
+    margin: 1vh 0;
+}
+
+.dataPaneTitle {
+    font-size: 1.5vh;
+}
+
+#arrivalsTitle {
+    font-size: 1.5vh;
+    margin-bottom: 0.1vh;
+    font-weight: bold;
+}
+
+#arrivalsSubtitle {
+    font-size: 1.2vh;
+    margin-bottom: 0.2vh;
+}
+
+
+.dataPaneTitle {
+    padding-left: 0.8vw;
+    height: 10%;
+    max-height: 2vh;
+    margin-top: 1vh ;
+    font-weight: bold;
+}
+
+#sankeyColHeaders {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5vh;
+    font-weight: bold;
+}
+
+#sankeyOrig {
+    color: darkblue;
+    margin-left: 2.5vw;
+}
+
+#sankeyDest {
+    color: darkred;
+    margin-right: 2vw;
+}
+
+#sankeyFlow {
+    color: grey;
+}
+
+  
+  /* Disagg colours */
+  
+  .all {
+  color: #5B9FCD;
+  }
+  
+  .u18 {
+    color: #e34a33;
+  }
+  
+  .o60 {
+    color: #f78ca0;
+  }
+  
+  .male {
+  color: #1E8F89;
+  }
+  
+  .female {
+  color: #F4BA3B;
+  }
+
+  .anychart-tooltip {
+    white-space: nowrap;
+  }
+
+
+
+  .legend h4 {
+    margin: 0 0 5px;
+    color: black;
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+    background-color: rgba(217,217,217,0.8);
+    padding: 6px 8px;
+    border-radius: 5px;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
