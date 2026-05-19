@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Groundtruth Agent Prototype Privacy Policy</title>
+  <style>
+    :root {
+      --bg: #f7f7f4;
+      --card: #ffffff;
+      --text: #1f2933;
+      --muted: #5f6c7b;
+      --border: #e2e8f0;
+      --accent: #245b5b;
+      --accent-light: #e5f0ef;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    main {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 48px 20px;
+    }
+
+    article {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    }
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 2rem;
+      line-height: 1.2;
+      color: var(--accent);
+    }
+
+    .updated {
+      margin-top: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .notice {
+      margin: 28px 0;
+      padding: 18px 20px;
+      border-radius: 12px;
+      background: var(--accent-light);
+      border-left: 5px solid var(--accent);
+    }
+
+    h2 {
+      margin-top: 32px;
+      margin-bottom: 10px;
+      font-size: 1.25rem;
+      color: var(--text);
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    ul {
+      margin-top: 8px;
+      margin-bottom: 18px;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    footer {
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+      main {
+        padding: 24px 14px;
+      }
+
+      article {
+        padding: 24px;
+        border-radius: 14px;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <article>
+      <h1>Groundtruth Agent Prototype Privacy Policy</h1>
+      <p class="updated">Last updated: 19 May 2026</p>
+
+      <div class="notice">
+        <p>
+          This is a limited private prototype for testing WhatsApp-based incident-reporting workflows.
+          It is not a public emergency reporting service.
+        </p>
+      </div>
+
+      <h2>Purpose</h2>
+      <p>
+        The Groundtruth Agent Prototype tests a workflow for receiving short incident reports through
+        WhatsApp, converting them into structured draft records, and asking follow-up questions where
+        important information is missing.
+      </p>
+
+      <h2>Information collected</h2>
+      <p>If you send a message to the prototype WhatsApp number, the system may process:</p>
+      <ul>
+        <li>Your WhatsApp phone number;</li>
+        <li>The text of messages you send;</li>
+        <li>Message metadata provided by WhatsApp, such as message IDs, timestamps, and delivery status;</li>
+        <li>Any information you voluntarily include in your message.</li>
+      </ul>
+      <p>
+        Testers should not send sensitive personal information, names of affected individuals, precise
+        household locations, or information that could put anyone at risk.
+      </p>
+
+      <h2>How information is used</h2>
+      <p>Information is used only to test and improve the prototype workflow, including:</p>
+      <ul>
+        <li>Receiving WhatsApp messages;</li>
+        <li>Extracting structured incident information;</li>
+        <li>Identifying missing information;</li>
+        <li>Sending follow-up questions;</li>
+        <li>Debugging and improving the system.</li>
+      </ul>
+
+      <h2>AI processing</h2>
+      <p>
+        Messages may be processed using an AI model to extract structured information and draft follow-up
+        questions. The system may produce imperfect outputs, and all outputs should be treated as draft
+        information for testing only.
+      </p>
+
+      <h2>Data storage</h2>
+      <p>
+        Messages and webhook payloads may be stored in development logs or a prototype database. Access is
+        limited to the prototype developer or authorised testers.
+      </p>
+
+      <h2>Data sharing</h2>
+      <p>
+        Information is not sold. Information is not shared publicly. Information may be processed by service
+        providers used to operate the prototype, such as hosting, messaging, database, and AI API providers.
+      </p>
+
+      <h2>Data retention</h2>
+      <p>
+        Test data may be deleted periodically during development. Testers can request deletion of messages
+        they have sent to the prototype.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        For questions or deletion requests, contact:
+        <a href="mailto:william.d.low@gmail.com">william.d.low@gmail.com</a>
+      </p>
+
+      <footer>
+        <p>
+          This policy applies only to the Groundtruth Agent Prototype test environment.
+        </p>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>
